@@ -20,3 +20,8 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [[<cmd>%y +<cr>]])
 
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+
+-- Enables Command+V to paste on neovide
+-- See: https://github.com/neovide/neovide/issues/113
+vim.keymap.set({ "n", "v" }, "<D-v>", [["+p]])
+vim.keymap.set({ "i" }, "<D-v>", [[+]])
