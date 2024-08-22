@@ -28,8 +28,8 @@ set ignorecase
 set smartcase
 
 " Persistent undo
+set undodir=~/.local/share/vim/undo/
 set undofile
-set undodir = "$HOME/.vim/undo"
 set updatetime=500
 
 " Wrapping and display settings
