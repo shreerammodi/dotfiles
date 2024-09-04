@@ -91,4 +91,8 @@ nnoremap <leader>Y <CMD>%y +<CR>
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 
+" Make Y behave like neovim
+nmap Y y$
+vmap Y y$
+
 set background=dark
