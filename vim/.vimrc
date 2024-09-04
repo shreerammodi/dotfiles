@@ -39,6 +39,7 @@ set scrolloff=3
 set title
 set wildmenu
 set showcmd
+set laststatus=2
 
 " Disable modeline for security
 set nomodeline
