@@ -1,37 +1,36 @@
-local function spell()
-  if vim.o.spell then
-    return string.format("SPELL[%s]", string.upper(vim.o.spelllang))
-  else
-    return ""
-  end
-end
+local lualine = require("lualine")
 
-local function trailing()
-  local line_nr = vim.fn.search([[\s$]], "nw")
-  if line_nr == 0 then
-    return ""
-  end
-
-  return string.format("T:%d", line_nr)
-end
-
-require("lualine").setup {
-  options = {
-    icons_enabled = true,
-    theme = "auto",
-    component_separators = { left = "", right = "" },
-    section_separators = { left = "", right = "" },
-    always_divide_middle = true,
-  },
-  sections = {
-    lualine_a = { "mode", spell },
-    lualine_b = {
-      {
-        "diff",
-        colored = false,
-        symbols = {added = "+", modified = "~", removed = "-"},
-      }
-    },
-    lualine_x = { trailing, "encoding", "fileformat", "filetype" },
-  },
+local conditions = {
+    buffer_not_empty = function()
+        return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
+    end,
+    hide_in_width = function()
+        return vim.fn.winwidth(0) > 80
+    end,
+    check_git_workspace = function()
+        local filepath = vim.fn.expand("%:p:h")
+        local gitdir = vim.fn.finddir(".git", filepath .. ";")
+        return gitdir and #gitdir > 0 and #gitdir < #filepath
+    end,
 }
+
+-- Config
+local config = {
+    options = {
+        component_separators = "",
+        section_separators = "",
+        theme = "auto",
+        always_divide_middle = true,
+    },
+    sections = {
+        lualine_a = { "mode" },
+        lualine_b = { "filename" },
+        lualine_c = { "branch", "diff" },
+        lualine_x = { "diagnostics" },
+        lualine_y = { "encoding", { "fileformat", symbols = { unix = "LF", dos = "CRLF", mac = "CR" } }, "filetype" },
+        lualine_z = { "location" },
+    },
+}
+
+-- Now don't forget to initialize lualine
+lualine.setup(config)

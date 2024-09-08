@@ -1,3 +1,6 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -27,5 +30,4 @@ vim.opt.modeline = false
 
 vim.opt.termguicolors = true
 
-vim.g.neovide_window_blurred = true
 vim.o.guifont = "IBM Plex Mono:h12"
