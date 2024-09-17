@@ -155,6 +155,7 @@ alt-r = 'mode resize'
 alt-semicolon = 'mode utility'
 
 [mode.resize.binding]
+s = ['balance-sizes', 'mode main']
 h = 'resize width -50'
 j = 'resize height +50'
 k = 'resize height -50'
@@ -164,7 +165,7 @@ esc = 'mode main'
 enter = 'mode main'
 
 [mode.utility.binding]
-b = ['balance-sizes', 'mode main']
+s = ['balance-sizes', 'mode main']
 r = ['flatten-workspace-tree', 'mode main']
 c = ['reload-config', 'mode main']
 q = 'exec-and-forget pkill -9 AeroSpace && open -a Aerospace'
