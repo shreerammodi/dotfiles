@@ -12,6 +12,7 @@ mason.setup({
 		"prettier",
 		"shellcheck",
 		"shfmt",
+		"rustywind",
 	},
 })
 
@@ -63,6 +64,7 @@ lspconfig.pyright.setup({})
 
 null_ls.setup({
 	sources = {
+		null_ls.builtins.formatting.rustywind,
 		null_ls.builtins.formatting.stylua,
 	},
 	on_attach = function(client, bufnr)
