@@ -94,7 +94,8 @@ outer.right =      5
 # '''
 
 alt-enter = 'exec-and-forget /etc/profiles/per-user/shreeram/bin/kitty -1 -d ~'
-alt-m = 'exec-and-forget /etc/profiles/per-user/shreeram/bin/kitty -1 -d ~ neomutt'
+alt-m = 'exec-and-forget /etc/profiles/per-user/shreeram/bin/kitty -1 -d ~ zsh -c neomutt'
+alt-w = 'close'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 alt-h = ['focus --boundaries-action stop left', 'move-mouse window-force-center']
