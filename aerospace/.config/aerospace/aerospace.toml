@@ -227,3 +227,7 @@ slash = 'slash'
 [[on-window-detected]]
 if.app-id = 'org.keepassxc.keepassxc'
 run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.dmitrynikolaev.numi'
+run = 'layout floating'
