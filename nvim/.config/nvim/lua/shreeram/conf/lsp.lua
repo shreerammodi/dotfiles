@@ -25,6 +25,7 @@ mason_lsp.setup({
         "kotlin_language_server",
         "lua_ls",
         "pyright",
+        "tailwindcss",
         "texlab",
         "tsserver",
     },
@@ -58,9 +59,10 @@ lspconfig.texlab.setup({
         },
     },
 })
-lspconfig.tsserver.setup({})
 lspconfig.jdtls.setup({})
 lspconfig.pyright.setup({})
+lspconfig.tailwindcss.setup({})
+lspconfig.tsserver.setup({})
 
 null_ls.setup({
     sources = {
