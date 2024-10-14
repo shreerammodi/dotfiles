@@ -23,3 +23,9 @@ desc = "Create a new tab with CWD"
 on   = "l"
 run  = "plugin --sync smart-enter"
 desc = "Enter the child directory, or open the file"
+
+
+[[manager.prepend_keymap]]
+on   = "<C-r>"
+run  = "select_all --state=false"
+desc = "Unselect all files"
