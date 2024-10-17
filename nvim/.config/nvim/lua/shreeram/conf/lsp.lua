@@ -9,10 +9,11 @@ mason.setup({
         "black",
         "clang-format",
         "latexindent",
+        "nixfmt",
         "prettier",
+        "rustywind",
         "shellcheck",
         "shfmt",
-        "rustywind",
     },
 })
 
@@ -24,6 +25,7 @@ mason_lsp.setup({
         "jdtls",
         "kotlin_language_server",
         "lua_ls",
+        "nil_ls",
         "pyright",
         "tailwindcss",
         "texlab",
@@ -35,6 +37,15 @@ lspconfig.clangd.setup({})
 lspconfig.cssls.setup({})
 lspconfig.html.setup({})
 lspconfig.kotlin_language_server.setup({})
+lspconfig.nil_ls.setup({
+    settings = {
+        ['nil'] = {
+            formatting = {
+                command = { "nixfmt" }
+            }
+        }
+    }
+})
 
 require("lspconfig").lua_ls.setup({
     settings = {
@@ -67,6 +78,7 @@ lspconfig.tsserver.setup({})
 null_ls.setup({
     sources = {
         null_ls.builtins.formatting.clang_format,
+        null_ls.builtins.formatting.nixfmt,
         null_ls.builtins.formatting.prettier,
         null_ls.builtins.formatting.rustywind,
         null_ls.builtins.formatting.stylua,
