@@ -1,6 +1,6 @@
 return {
-	"nvim-telescope/telescope-file-browser.nvim",
-	commit = "c5a14e0550699a7db575805cdb9ddc969ba0f1f5",
-	lazy = true,
-	dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+    "nvim-telescope/telescope-file-browser.nvim",
+    commit = "626998e5c1b71c130d8bc6cf7abb6709b98287bb",
+    lazy = true,
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 }

@@ -1,5 +1,5 @@
 return {
-	"lervag/vimtex",
-	version = "2.15",
-	ft = "tex",
+    "lervag/vimtex",
+    version = "2.16",
+    ft = "tex",
 }

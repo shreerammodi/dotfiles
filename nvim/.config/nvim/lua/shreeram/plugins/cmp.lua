@@ -1,6 +1,6 @@
 return {
     "hrsh7th/nvim-cmp",
-    commit = "ae644feb7b67bf1ce4260c231d1d4300b19c6f30",
+    commit = "12509903a5723a876abd65953109f926f4634c30",
     event = "InsertEnter",
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
