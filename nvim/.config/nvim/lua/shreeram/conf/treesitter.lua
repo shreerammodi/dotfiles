@@ -21,8 +21,6 @@ require("nvim-treesitter.configs").setup({
         "markdown",
         "markdown_inline",
         "nix",
-        "norg",
-        "org",
         "python",
         "regex",
         "toml",
@@ -37,4 +35,5 @@ require("nvim-treesitter.configs").setup({
     indent = {
         enable = true,
     },
+    ignore_install = { "org" }
 })
