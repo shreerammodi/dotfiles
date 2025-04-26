@@ -6,6 +6,7 @@ local lsp_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 mason.setup({
     ensure_installed = {
+        "asmfmt",
         "black",
         "clang-format",
         "latexindent",
@@ -19,6 +20,7 @@ mason.setup({
 
 mason_lsp.setup({
     ensure_installed = {
+        "asm_lsp",
         "bashls",
         "clangd",
         "html",
@@ -29,10 +31,11 @@ mason_lsp.setup({
         "pyright",
         "tailwindcss",
         "texlab",
-        "tsserver",
+        "ts_ls",
     },
 })
 
+lspconfig.asm_lsp.setup({})
 lspconfig.clangd.setup({})
 lspconfig.cssls.setup({})
 lspconfig.html.setup({})
@@ -73,13 +76,17 @@ lspconfig.texlab.setup({
 lspconfig.jdtls.setup({})
 lspconfig.pyright.setup({})
 lspconfig.tailwindcss.setup({})
-lspconfig.tsserver.setup({})
+lspconfig.ts_ls.setup({})
 
 null_ls.setup({
     sources = {
+        null_ls.builtins.formatting.asmfmt,
+        null_ls.builtins.formatting.black,
         null_ls.builtins.formatting.clang_format,
         null_ls.builtins.formatting.nixfmt,
-        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.prettier.with({
+            extra_args = { "--prose-wrap", "always" }
+        }),
         null_ls.builtins.formatting.rustywind,
         null_ls.builtins.formatting.stylua,
     },
