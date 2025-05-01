@@ -7,5 +7,6 @@ return {
                 telescope = require("telescope.themes").get_ivy(),
             }
         })
+        require("shreeram.conf.zk")
     end
 }
