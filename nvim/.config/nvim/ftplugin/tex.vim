@@ -9,3 +9,8 @@ endif
 setlocal conceallevel=0
 
 setlocal spell
+
+let g:vimtex_quickfix_ignore_filters = [
+            \ 'Underfull',
+            \ 'Overfull',
+            \]
