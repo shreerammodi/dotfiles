@@ -10,34 +10,34 @@ local function toggleApp(appName)
 	end
 end
 
-hs.hotkey.bind({ "alt" }, "R", function()
+hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "R", function()
 	toggleApp("Firefox")
 end)
 
-hs.hotkey.bind({ "alt" }, "T", function()
+hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "T", function()
 	toggleApp("Kitty")
 end)
 
-hs.hotkey.bind({ "alt" }, "V", function()
+hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "V", function()
 	toggleApp("Microsoft Word")
 end)
 
-hs.hotkey.bind({ "alt" }, "X", function()
+hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "X", function()
 	toggleApp("Microsoft Excel")
 end)
 
-hs.hotkey.bind({ "alt" }, "D", function()
+hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "D", function()
 	toggleApp("Discord")
 end)
 
-hs.hotkey.bind({ "alt" }, "S", function()
+hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "S", function()
 	toggleApp("Slack")
 end)
 
-hs.hotkey.bind({ "alt" }, "Z", function()
+hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "Z", function()
 	toggleApp("Zotero")
 end)
 
-hs.hotkey.bind({ "alt" }, "G", function()
+hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "G", function()
 	toggleApp("Emacs")
 end)
