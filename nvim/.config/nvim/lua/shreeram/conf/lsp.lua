@@ -9,6 +9,7 @@ mason.setup({
         "asmfmt",
         "black",
         "clang-format",
+        "isort",
         "latexindent",
         "nixfmt",
         "prettier",
@@ -83,6 +84,7 @@ null_ls.setup({
         null_ls.builtins.formatting.asmfmt,
         null_ls.builtins.formatting.black,
         null_ls.builtins.formatting.clang_format,
+        null_ls.builtins.formatting.isort,
         null_ls.builtins.formatting.nixfmt,
         null_ls.builtins.formatting.prettier.with({
             extra_args = { "--prose-wrap", "always" }
