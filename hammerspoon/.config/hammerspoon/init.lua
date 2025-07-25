@@ -41,4 +41,7 @@ end)
 hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "G", function()
     toggleApp("Emacs")
 end)
+
+hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "C", function()
+    toggleApp("Numi")
 end)
