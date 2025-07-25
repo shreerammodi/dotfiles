@@ -16,6 +16,7 @@ mason.setup({
         "rustywind",
         "shellcheck",
         "shfmt",
+        "sqlfluff",
     },
 })
 
@@ -91,6 +92,9 @@ null_ls.setup({
         }),
         null_ls.builtins.formatting.rustywind,
         null_ls.builtins.formatting.stylua,
+        null_ls.builtins.diagnostics.sqlfluff.with({
+            extra_args = { "--dialect", "sqlite" },
+        }),
     },
     on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
