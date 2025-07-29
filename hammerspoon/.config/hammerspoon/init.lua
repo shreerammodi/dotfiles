@@ -15,7 +15,7 @@ hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "R", function()
 end)
 
 hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "T", function()
-    toggleApp("kitty")
+    toggleApp("Ghostty")
 end)
 
 hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "V", function()
