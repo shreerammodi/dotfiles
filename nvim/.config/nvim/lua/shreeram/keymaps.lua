@@ -14,8 +14,6 @@ vim.keymap.set("n", "<leader>cp", vim.cmd.cprev, { desc = "Go to prev error" })
 
 vim.keymap.set("i", "<C-l>", "<C-G>u<Esc>[s1z=`]a<C-G>u", { desc = "Correct spelling error" })
 
-vim.keymap.set("x", "<leader>p", [["_dP]])
-
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank into clipboard" })
 vim.keymap.set("n", "<leader>Y", [[<cmd>%y +<cr>]], { desc = "Yank buffer into clipboard" })
 

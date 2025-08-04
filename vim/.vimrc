@@ -79,9 +79,6 @@ nnoremap <leader>cp <CMD>cprev<CR>
 " Correct spelling error in insert mode
 inoremap <C-l> <C-G>u<Esc>[s1z=`]a<C-G>u
 
-" Paste without overwriting the register in visual mode
-xnoremap <leader>p "_dP
-
 " Yank to system clipboard
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
