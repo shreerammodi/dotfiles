@@ -47,7 +47,7 @@ require("telescope").setup({
         help_tags = { theme = "ivy" },
         live_grep = { theme = "ivy", },
     },
-    extensions =  {
+    extensions = {
         file_browser = {
             theme = "ivy",
             hidden = true,
@@ -112,7 +112,6 @@ if is_git_repo() then
             prompt_title = string.format('Search Project [%s]', find_project_name())
         })
     end, { desc = "Search project" })
-
 end
 
 vim.keymap.set("n", "<leader>swd", function()
