@@ -43,5 +43,9 @@ hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "G", function()
 end)
 
 hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "C", function()
+    toggleApp("Claude")
+end)
+
+hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "Q", function()
     toggleApp("Numi")
 end)
