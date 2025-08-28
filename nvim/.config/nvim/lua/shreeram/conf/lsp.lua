@@ -37,12 +37,17 @@ mason_lsp.setup({
     },
 })
 
-lspconfig.asm_lsp.setup({})
-lspconfig.clangd.setup({})
-lspconfig.cssls.setup({})
-lspconfig.html.setup({})
-lspconfig.kotlin_language_server.setup({})
-lspconfig.nil_ls.setup({
+vim.lsp.enable('asm_lsp')
+
+vim.lsp.enable('clangd')
+
+vim.lsp.enable('cssls')
+
+vim.lsp.enable('html')
+
+vim.lsp.enable('kotlin_language_server')
+
+vim.lsp.config('nil_ls', {
     settings = {
         ['nil'] = {
             formatting = {
@@ -51,8 +56,9 @@ lspconfig.nil_ls.setup({
         }
     }
 })
+vim.lsp.enable('nill_ls')
 
-require("lspconfig").lua_ls.setup({
+vim.lsp.config('lua_ls', {
     settings = {
         Lua = {
             completion = {
@@ -65,8 +71,9 @@ require("lspconfig").lua_ls.setup({
         },
     },
 })
+vim.lsp.enable('lua_ls')
 
-lspconfig.texlab.setup({
+vim.lsp.config('texlab', {
     settings = {
         texlab = {
             diagnostics = {
@@ -75,10 +82,15 @@ lspconfig.texlab.setup({
         },
     },
 })
-lspconfig.jdtls.setup({})
-lspconfig.pyright.setup({})
-lspconfig.tailwindcss.setup({})
-lspconfig.ts_ls.setup({})
+vim.lsp.enable('texlab')
+
+vim.lsp.enable('jdtls')
+
+vim.lsp.enable('pyright')
+
+vim.lsp.enable('tailwindcss')
+
+vim.lsp.enable('ts_ls')
 
 null_ls.setup({
     sources = {
@@ -91,7 +103,11 @@ null_ls.setup({
             extra_args = { "--prose-wrap", "always" }
         }),
         null_ls.builtins.formatting.rustywind,
-        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.stylua.with({
+            condition = function(utils)
+                return utils.root_has_file({ "stylua.toml", ".stylua.toml" })
+            end,
+        }),
         null_ls.builtins.diagnostics.sqlfluff.with({
             extra_args = { "--dialect", "sqlite" },
         }),
