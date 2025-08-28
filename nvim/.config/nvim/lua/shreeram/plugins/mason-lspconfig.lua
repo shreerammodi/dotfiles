@@ -1,4 +1,4 @@
 return {
     "williamboman/mason-lspconfig.nvim",
-    version = "1.32.0",
+    version = "2.1.0",
 }

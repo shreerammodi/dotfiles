@@ -1,4 +1,5 @@
 return {
     "williamboman/mason.nvim",
-    version = "1.11.0",
+    version = "2.0.1",
+    opts = {}
 }
