@@ -6,3 +6,5 @@
 **/.zsh_sessions
 
 .mailsynclastrun
+
+nvim/.config/nvim/spell/*
