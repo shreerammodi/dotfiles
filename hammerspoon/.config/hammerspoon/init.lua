@@ -11,7 +11,7 @@ local function toggleApp(appName)
 end
 
 hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "R", function()
-    toggleApp("Firefox")
+    toggleApp("Brave Browser")
 end)
 
 hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "T", function()
