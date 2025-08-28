@@ -49,3 +49,7 @@ end)
 hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "Q", function()
     toggleApp("Numi")
 end)
+
+hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "N", function()
+    toggleApp("Obsidian")
+end)
