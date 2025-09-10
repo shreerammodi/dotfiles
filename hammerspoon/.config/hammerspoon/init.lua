@@ -53,3 +53,7 @@ end)
 hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "N", function()
     toggleApp("Obsidian")
 end)
+
+hs.hotkey.bind({ "shift", "alt", "cmd", "ctrl" }, "P", function()
+    toggleApp("Preview")
+end)
