@@ -2,6 +2,7 @@ local mason = require("mason")
 local lspconfig = require("lspconfig")
 local mason_lsp = require("mason-lspconfig")
 local null_ls = require("null-ls")
+local null_ls_helpers = require("null-ls.helpers")
 local lsp_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 mason.setup({
@@ -17,6 +18,7 @@ mason.setup({
         "shellcheck",
         "shfmt",
         "sqlfluff",
+        "tex-fmt",
     },
 })
 
@@ -111,6 +113,16 @@ null_ls.setup({
         null_ls.builtins.diagnostics.sqlfluff.with({
             extra_args = { "--dialect", "sqlite" },
         }),
+        {
+            name = "tex-fmt",
+            filetypes = { "tex" },
+            method = null_ls.methods.FORMATTING,
+            generator = null_ls_helpers.formatter_factory({
+                command = "tex-fmt",
+                args = { "--stdin", "--quiet" },
+                to_stdin = true,
+            }),
+        }
     },
     on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
