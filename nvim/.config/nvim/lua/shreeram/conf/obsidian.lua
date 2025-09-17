@@ -8,7 +8,6 @@ require("obsidian").setup({
     },
     daily_notes = {
         folder = "daily/",
-        template = "00-SYSTEM/templates/Daily-Note-Template.md"
     }
 })
 
