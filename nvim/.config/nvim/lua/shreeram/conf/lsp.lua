@@ -5,6 +5,8 @@ local null_ls = require("null-ls")
 local null_ls_helpers = require("null-ls.helpers")
 local lsp_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
+vim.keymap.set({ "n", "x" }, "<leader>lr", function() vim.lsp.buf.rename() end)
+
 mason.setup({
     ensure_installed = {
         "asmfmt",
@@ -12,6 +14,7 @@ mason.setup({
         "clang-format",
         "isort",
         "latexindent",
+        "markdownlint",
         "nixfmt",
         "prettier",
         "rustywind",
@@ -102,13 +105,18 @@ null_ls.setup({
         null_ls.builtins.formatting.isort,
         null_ls.builtins.formatting.nixfmt,
         null_ls.builtins.formatting.prettier.with({
-            extra_args = { "--prose-wrap", "always" }
+            filetypes = { "markdown" },
+            extra_args = { "--prose-wrap", "always", "--print-width", "80" }
         }),
         null_ls.builtins.formatting.rustywind,
         null_ls.builtins.formatting.stylua.with({
             condition = function(utils)
                 return utils.root_has_file({ "stylua.toml", ".stylua.toml" })
             end,
+        }),
+        null_ls.builtins.formatting.markdownlint,
+        null_ls.builtins.diagnostics.markdownlint.with({
+            extra_args = { "--disable", "MD024" }
         }),
         null_ls.builtins.diagnostics.sqlfluff.with({
             extra_args = { "--dialect", "sqlite" },
