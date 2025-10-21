@@ -1,19 +1,31 @@
 return {
-    "epwalsh/obsidian.nvim",
-    version = "3.9.0",
+    "obsidian-nvim/obsidian.nvim",
+    version = "3.14.2",
     dependencies = {
         "nvim-lua/plenary.nvim",
     },
     cmd = "Obsidian",
     keys = {
-        { "<leader>nd", desc = "Daily notes" },
-        { "<leader>nD", desc = "Today's daily" },
-        { "<leader>nt", desc = "Search tags" },
-        { "<leader>ns", desc = "Search vault" },
-        { "<leader>nf", desc = "Find note" },
-
+        { "<leader>nD", "<CMD>Obsidian today<CR>",        desc = "Today's daily" },
+        { "<leader>nd", "<CMD>Obsidian dailies<CR>",      desc = "Daily notes" },
+        { "<leader>nf", "<CMD>Obsidian quick_switch<CR>", desc = "Find note" },
+        { "<leader>nn", "<CMD>Obsidian new<CR>",          desc = "New note" },
+        { "<leader>ns", "<CMD>Obsidian switch<CR>",       desc = "Search vault" },
     },
-    config = function()
-        require("shreeram.conf.obsidian")
-    end,
+    opts = {
+        frontmatter = {
+            enabled = false
+        },
+        legacy_commands = false,
+        picker = { name = snacks },
+        workspaces = {
+            {
+                name = "notes",
+                path = "~/Documents/notes",
+            },
+        },
+        daily_notes = {
+            folder = "daily/",
+        },
+    }
 }
