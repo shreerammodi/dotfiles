@@ -30,6 +30,7 @@ mason_lsp.setup({
         "asm_lsp",
         "bashls",
         "clangd",
+        "gopls",
         "html",
         "jdtls",
         "kotlin_language_server",
@@ -47,6 +48,8 @@ vim.lsp.enable('asm_lsp')
 vim.lsp.enable('clangd')
 
 vim.lsp.enable('cssls')
+
+vim.lsp.enable('gopls')
 
 vim.lsp.enable('html')
 
