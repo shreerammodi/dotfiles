@@ -1,5 +1,6 @@
 return {
     "folke/snacks.nvim",
+    version = "2.27.0",
     opts = {
         picker = {},
         explorer = {}
