@@ -66,6 +66,7 @@ vim.lsp.config('nil_ls', {
 })
 vim.lsp.enable('nill_ls')
 
+vim.lsp.enable('lua_ls')
 vim.lsp.config('lua_ls', {
     settings = {
         Lua = {
@@ -79,7 +80,6 @@ vim.lsp.config('lua_ls', {
         },
     },
 })
-vim.lsp.enable('lua_ls')
 
 vim.lsp.config('texlab', {
     settings = {
