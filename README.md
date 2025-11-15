@@ -1,3 +1,4 @@
-# Shrimpram's Dotfiles
+# Shreeram's Dotfiles
 
-My dotfiles and config, managed using [stow](https://www.gnu.org/software/stow/).
+My dotfiles and config, managed using
+[stow](https://www.gnu.org/software/stow/).
