@@ -9,8 +9,15 @@ return {
         { "<leader>nD", "<CMD>Obsidian today<CR>",        desc = "Today's daily" },
         { "<leader>nd", "<CMD>Obsidian dailies<CR>",      desc = "Daily notes" },
         { "<leader>nf", "<CMD>Obsidian quick_switch<CR>", desc = "Find note" },
-        { "<leader>nn", "<CMD>Obsidian new<CR>",          desc = "New note" },
-        { "<leader>ns", "<CMD>Obsidian switch<CR>",       desc = "Search vault" },
+        {
+            "<leader>nn",
+            function()
+                vim.ui.input({ prompt = "Note title: " },
+                    function(title) if title then vim.cmd("Obsidian new " .. title) end end)
+            end,
+            desc = "New note"
+        },
+        { "<leader>ns", "<CMD>Obsidian switch<CR>", desc = "Search vault" },
     },
     opts = {
         frontmatter = {
