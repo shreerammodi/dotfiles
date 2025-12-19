@@ -1,0 +1,226 @@
+\ProvidesPackage{preamble}
+
+\let\CheckCommand\providecommand
+
+\usepackage[nopatch=footnote]{microtype} % improves typography
+
+\usepackage{amsmath, amsfonts, amsthm, amssymb, mathtools} % provides
+% math typesetting
+
+\usepackage[
+  autocite = footnote,
+  backend = biber,
+  doi     = false,
+  isbn    = false,
+  url     = true,
+]{biblatex-chicago}
+
+\addbibresource{library.bib}
+
+\usepackage{braket}
+
+\usepackage[hidelinks]{hyperref}
+
+\usepackage{cleveref} % provides smart cross-referencing
+
+\usepackage{paralist}
+
+\usepackage{minted}
+\setminted{bgcolor=codebg}
+\setminted{bgcolorpadding=5px}
+\setmintedinline{bgcolorpadding=0px}
+
+\usepackage[threshold=1]{csquotes} % provides inline quotation styles
+
+\usepackage{diagbox}
+
+\usepackage{dsfont} % adds doublestroke symbols
+
+\usepackage{enumitem} % enables control over list items
+
+\usepackage{float}
+
+\usepackage{forest} % generates binary trees
+
+\usepackage{prooftrees}
+
+\usepackage{fontspec}
+
+\usepackage{graphicx}
+
+\usepackage{lipsum} % generates lipsum text
+
+% \usepackage{newpxtext,newpxmath} % loads the Palatino font
+
+\usepackage{parskip}
+
+\usepackage{pgf,tikz} % provides tikz graphics
+
+\usepackage{siunitx}
+
+\usepackage{tabularray} % provides advanced tables, replacement for tabularx
+
+\usepackage{soul} % preferable to ulem
+\sethlcolor{lightblue}
+
+\usepackage{url} % provides better support for urls
+
+\usepackage[dvipsnames]{xcolor}
+\definecolor{codebg}{RGB}{253,246,227}
+\definecolor{lightblue}{RGB}{117, 251, 253}
+
+% dsfont symbols
+
+\newcommand{\Z}{\mathds{Z}}
+\newcommand{\N}{\mathds{N}}
+\newcommand{\R}{\mathds{R}}
+\newcommand{\E}{\mathds{E}}
+
+% math operators
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\floor}[1]{\lfloor#1\rfloor}
+\providecommand{\var}[1]{\text{Var}(#1)}
+\DeclareMathOperator{\bdiv}{div}
+
+% Big O
+\newcommand{\bigo}[1]{\mathrm{O}(#1)}
+% Little o
+\newcommand{\lito}[1]{\mathrm{o}(#1)}
+
+% negligible function
+\newcommand{\negl}[1]{\mathrm{negl}(#1)}
+
+% defines theorems for amsthm
+
+\makeatother
+\usepackage{thmtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{
+  skipabove=1em,
+  skipbelow=0em,
+  innertopmargin=10pt,
+  innerbottommargin=10pt
+}
+
+\theoremstyle{definition}
+
+\declaretheoremstyle[
+  headfont=\bfseries\sffamily\color{ForestGreen!70!black},
+  bodyfont=\normalfont,
+  mdframed={
+    linewidth=2pt,
+    rightline=false,
+    topline=false,
+    bottomline=false,
+    linecolor=ForestGreen,
+    backgroundcolor=ForestGreen!5,
+  }
+]{thmgreenbox}
+
+\declaretheoremstyle[
+  headfont=\bfseries\sffamily\color{NavyBlue!70!black},
+  bodyfont=\normalfont,
+  mdframed={
+    linewidth=2pt,
+    rightline=false,
+    topline=false,
+    bottomline=false,
+    linecolor=NavyBlue,
+    backgroundcolor=NavyBlue!5,
+  }
+]{thmbluebox}
+
+\declaretheoremstyle[
+  headfont=\bfseries\sffamily\color{NavyBlue!70!black},
+  bodyfont=\normalfont,
+  mdframed={
+    linewidth=2pt,
+    rightline=false,
+    topline=false,
+    bottomline=false,
+    linecolor=NavyBlue
+  }
+]{thmblueline}
+
+\declaretheoremstyle[
+  headfont=\bfseries\sffamily\color{RawSienna!70!black},
+  bodyfont=\normalfont,
+  mdframed={
+    linewidth=2pt,
+    rightline=false,
+    topline=false,
+    bottomline=false,
+    linecolor=RawSienna,
+    backgroundcolor=RawSienna!5,
+  }
+]{thmredbox}
+
+\declaretheoremstyle[
+  headfont=\bfseries\sffamily\color{RawSienna!70!black},
+  bodyfont=\normalfont,
+  numbered=no,
+  mdframed={
+    linewidth=2pt,
+    rightline=false,
+    topline=false,
+    bottomline=false,
+    linecolor=RawSienna,
+    backgroundcolor=RawSienna!1,
+  },
+  qed=\qedsymbol
+]{thmproofbox}
+
+\declaretheoremstyle[
+  headfont=\bfseries\sffamily\color{NavyBlue!70!black},
+  bodyfont=\normalfont,
+  numbered=no,
+  mdframed={
+    linewidth=2pt,
+    rightline=false,
+    topline=false,
+    bottomline=false,
+    linecolor=NavyBlue,
+    backgroundcolor=NavyBlue!2,
+  },
+]{thmexplanationbox}
+
+\declaretheoremstyle[
+  headfont=\bfseries\sffamily\color{Fuchsia!70!black},
+  bodyfont=\normalfont,
+  numbered=no,
+  mdframed={
+    linewidth=2pt,
+    rightline=false,
+    topline=false,
+    bottomline=false,
+    linecolor=Fuchsia,
+    backgroundcolor=Fuchsia!1,
+  },
+]{thmfuchsiabox}
+
+\declaretheorem[style=thmgreenbox, name=Definition]{definition}
+\declaretheorem[style=thmbluebox, numbered=no, name=Example]{eg}
+\declaretheorem[style=thmredbox, name=Proposition]{prop}
+\declaretheorem[style=thmredbox, name=Theorem]{theorem}
+\declaretheorem[style=thmredbox, name=Lemma]{lemma}
+\declaretheorem[style=thmredbox, numbered=no, name=Corollary]{corollary}
+\declaretheorem[style=thmblueline, numbered=no, name=Remark]{remark}
+\declaretheorem[style=thmblueline, numbered=no, name=Note]{note}
+\declaretheorem[style=thmexplanationbox, numbered=no, name=Explanation]{expl}
+\declaretheorem[style=thmfuchsiabox, numbered=no, name=Thought]{thought}
+
+\renewenvironment{quote}
+{
+  \begin{mdframed}[
+      linewidth=2pt,
+      rightline=false,
+      topline=false,
+      bottomline=false,
+      linecolor=Black,
+      backgroundcolor=Black!3,
+  ]}
+  {
+\end{mdframed}}
+
+\author{Shreeram Modi}
