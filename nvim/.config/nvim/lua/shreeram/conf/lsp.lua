@@ -16,7 +16,7 @@ mason.setup({
         "latexindent",
         "markdownlint",
         "nixfmt",
-        "prettier",
+        "prettierd",
         "rustywind",
         "shellcheck",
         "shfmt",
@@ -30,6 +30,7 @@ mason_lsp.setup({
         "asm_lsp",
         "bashls",
         "clangd",
+        "eslint",
         "gopls",
         "html",
         "jdtls",
@@ -37,7 +38,6 @@ mason_lsp.setup({
         "lua_ls",
         "nil_ls",
         "pyright",
-        "tailwindcss",
         "texlab",
         "ts_ls",
     },
@@ -48,6 +48,8 @@ vim.lsp.enable('asm_lsp')
 vim.lsp.enable('clangd')
 
 vim.lsp.enable('cssls')
+
+vim.lsp.enable('eslint_lsp')
 
 vim.lsp.enable('gopls')
 
@@ -108,7 +110,7 @@ null_ls.setup({
         null_ls.builtins.formatting.isort,
         null_ls.builtins.formatting.nixfmt,
         null_ls.builtins.formatting.prettier.with({
-            filetypes = { "markdown" },
+            filetypes = { "markdown", "javascript" },
             extra_args = { "--prose-wrap", "always", "--print-width", "80" }
         }),
         null_ls.builtins.formatting.rustywind,
@@ -117,7 +119,6 @@ null_ls.setup({
                 return utils.root_has_file({ "stylua.toml", ".stylua.toml" })
             end,
         }),
-        null_ls.builtins.formatting.markdownlint,
         null_ls.builtins.diagnostics.markdownlint.with({
             extra_args = { "--disable", "MD024" }
         }),
@@ -142,6 +143,10 @@ null_ls.setup({
                 group = lsp_augroup,
                 buffer = bufnr,
                 callback = function()
+                    local first_line = vim.api.nvim_buf_get_lines(bufnr, 0, 1, false)[1] or ""
+                    if first_line:match("^%s*<!%-%-%s*Format:%s*OFF%s*%-%->") then
+                        return
+                    end
                     -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
                     -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
                     vim.lsp.buf.format()
@@ -157,6 +162,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     callback = function()
         -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
         -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
-        vim.lsp.buf.format()
+        vim.lsp.buf.format({ async = false })
     end,
 })
