@@ -1,2 +1,2 @@
-setlocal conceallevel=1
+setlocal conceallevel=0
 setlocal spell
