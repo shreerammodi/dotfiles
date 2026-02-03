@@ -17,7 +17,7 @@ return {
             end,
             desc = "New note"
         },
-        { "<leader>ns", "<CMD>Obsidian switch<CR>", desc = "Search vault" },
+        { "<leader>ns", "<CMD>Obsidian search<CR>", desc = "Search vault" },
     },
     opts = {
         frontmatter = {
