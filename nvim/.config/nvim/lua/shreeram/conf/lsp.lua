@@ -134,6 +134,16 @@ null_ls.setup({
                 args = { "--stdin", "--quiet" },
                 to_stdin = true,
             }),
+        },
+        {
+            name = "hledger-print",
+            filetypes = { "ledger" },
+            method = null_ls.methods.FORMATTING,
+            generator = null_ls_helpers.formatter_factory({
+                command = "hledger",
+                args = { "print", "-f", "-" },
+                to_stdin = true,
+            }),
         }
     },
     on_attach = function(client, bufnr)
