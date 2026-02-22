@@ -135,16 +135,6 @@ null_ls.setup({
                 to_stdin = true,
             }),
         },
-        {
-            name = "hledger-print",
-            filetypes = { "ledger" },
-            method = null_ls.methods.FORMATTING,
-            generator = null_ls_helpers.formatter_factory({
-                command = "hledger",
-                args = { "print", "-f", "-" },
-                to_stdin = true,
-            }),
-        },
     },
     on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
