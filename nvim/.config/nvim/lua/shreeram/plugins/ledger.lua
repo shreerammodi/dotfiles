@@ -1,6 +1,6 @@
 return {
     'wllfaria/ledger.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'ledger/vim-ledger' },
     ft = { 'ledger' },
     config = function()
         require('ledger').setup({
@@ -13,8 +13,8 @@ return {
                 strict = false,
             },
             snippets = {
-                native = { enabled = false },
-                cmp    = { enabled = false },
+                native  = { enabled = false },
+                cmp     = { enabled = false },
                 luasnip = { enabled = true },
             },
             keymaps = {
