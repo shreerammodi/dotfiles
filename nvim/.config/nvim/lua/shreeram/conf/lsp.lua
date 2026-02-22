@@ -144,7 +144,7 @@ null_ls.setup({
                 args = { "print", "-f", "-" },
                 to_stdin = true,
             }),
-        }
+        },
     },
     on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
