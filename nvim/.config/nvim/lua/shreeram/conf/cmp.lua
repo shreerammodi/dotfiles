@@ -59,3 +59,12 @@ cmp.config.formatting = {}
 
 -- Necessary config for nvim-autopairs
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+-- ledger.nvim account name completion
+cmp.setup.filetype("ledger", {
+    sources = {
+        { name = "ledger" },
+        { name = "luasnip" },
+        { name = "path" },
+    },
+})
