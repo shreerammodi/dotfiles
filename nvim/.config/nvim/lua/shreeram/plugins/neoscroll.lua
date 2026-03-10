@@ -1,6 +1,6 @@
 return {
     "karb94/neoscroll.nvim",
-    commit = "f957373912e88579e26fdaea4735450ff2ef5c9c",
+    commit = "c8d29979cb0cb3a2437a8e0ae683fd82f340d3b8",
     event = "WinScrolled",
     keys = {
         { "<C-e>", mode = { "n", "v" } },
