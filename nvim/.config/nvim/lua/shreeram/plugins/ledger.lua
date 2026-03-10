@@ -28,14 +28,6 @@ return {
                 { key = '<leader>hr', name = 'Register', command = 'hledger reg' },
                 { key = '<leader>hc', name = 'Check',    command = 'hledger check' },
             },
-            tui = {
-                initialize = { '<leader>ht' },
-                shutdown   = { '<leader>hq' },
-            },
-        },
-        tui = {
-            enabled     = true,
-            open_in_tab = true,
         },
     }
 }
