@@ -8,7 +8,7 @@ return {
             cmp = { enabled = true },
         },
         diagnostics = {
-            lsp_diagnostics = true,
+            lsp_diagnostics = false,
             strict = false,
         },
         snippets = {
