@@ -7,6 +7,10 @@ local lsp_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 vim.keymap.set({ "n", "x" }, "<leader>lr", function() vim.lsp.buf.rename() end)
 
+vim.api.nvim_create_user_command("StopLSP", function()
+    vim.lsp.stop_client(vim.lsp.get_clients())
+end, {})
+
 mason.setup({
     ensure_installed = {
         "asmfmt",
