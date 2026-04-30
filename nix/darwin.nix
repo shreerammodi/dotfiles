@@ -47,6 +47,7 @@
       "flux-app"
       "hammerspoon"
       "iina"
+      "sioyek"
     ];
   };
 
