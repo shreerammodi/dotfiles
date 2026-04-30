@@ -9,7 +9,6 @@
     iina
   ];
 
-  # services.karabiner-elements.enable = true;
   # nix.package = pkgs.nix;
 
   # Necessary for using flakes on this system.
@@ -48,7 +47,6 @@
       "flux-app"
       "hammerspoon"
       "iina"
-      "maccy"
     ];
   };
 
