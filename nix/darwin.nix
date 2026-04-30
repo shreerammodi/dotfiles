@@ -48,6 +48,7 @@
       "hammerspoon"
       "iina"
       "sioyek"
+      "xykong/tap/flux-markdown"
     ];
   };
 
