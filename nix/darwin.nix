@@ -5,9 +5,7 @@
 {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-    iina
-  ];
+  environment.systemPackages = with pkgs; [ ];
 
   # nix.package = pkgs.nix;
 
@@ -39,6 +37,8 @@
     enable = true;
 
     brews = [
+      "mpd"
+      "newsboat"
     ];
 
     casks = [
@@ -47,7 +47,7 @@
       "flux-app"
       "hammerspoon"
       "iina"
-      "sioyek"
+      "maccy"
     ];
   };
 
