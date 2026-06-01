@@ -3,11 +3,18 @@
 [ -f ~/.config/zsh/nnn.zsh ] && source ~/.config/zsh/nnn.zsh
 [ -f ~/.config/zsh/fzf-tab-config.zsh ] && source ~/.config/zsh/fzf-tab-config.zsh
 
+alias b="buku --suggest"
 alias e="eza"
 alias ea="eza --all"
 alias el="eza --long --header --git --icons --classify --all"
 alias et="eza --tree --level=2 --long --header --git --icons --classify --all"
 alias lg="lazygit"
+alias hl="hledger"
+alias hl-roi='hledger roi --pretty --value=end,$ --infer-market-prices \
+    --inv "assets:brokerage:individual" \
+    --inv "assets:retirement:roth" \
+    --pnl "income:capitalgains" \
+    --pnl "income:dividends"'
 alias rem="reminders"
 alias spt="spotify_player"
 
@@ -27,11 +34,26 @@ bindkey '^e' edit-command-line
 
 eval "$(zoxide init zsh)"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+function y() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
+}
+
+[ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \
+  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+[ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ] && source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
 
 eval "$(/usr/libexec/path_helper)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 path+=(~/.local/bin)
+path+=(~/node_modules/.bin)
+path+=(~/.orbstack/bin)
 
 path+=(~/.cargo/bin)
 
@@ -39,4 +61,4 @@ path+=(~/.cargo/bin)
 path=("/opt/homebrew/opt/openjdk/bin" $path)
 
 # QMK tab completion
-eval "$(register-python-argcomplete --no-defaults qmk)"
+# eval "$(register-python-argcomplete --no-defaults qmk)"

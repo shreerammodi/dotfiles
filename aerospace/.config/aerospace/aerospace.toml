@@ -108,9 +108,9 @@ on-mode-changed = []
     # end tell'
     # '''
 
-    cmd-ctrl-alt-shift-t = 'exec-and-forget /etc/profiles/per-user/shreeram/bin/kitty -1 -d ~'
-    cmd-ctrl-alt-shift-m = 'exec-and-forget /etc/profiles/per-user/shreeram/bin/kitty -1 -d ~ --title neomutt -- zsh -c neomutt'
-    cmd-ctrl-alt-shift-y = 'exec-and-forget /etc/profiles/per-user/shreeram/bin/kitty -1 -d ~ --title yazi -- zsh -c yazi'
+    cmd-ctrl-alt-shift-t = 'exec-and-forget /opt/homebrew/bin/kitty -1 -d ~'
+    cmd-ctrl-alt-shift-m = 'exec-and-forget /opt/homebrew/bin/kitty -1 -d ~ --title neomutt -- zsh -c neomutt'
+    cmd-ctrl-alt-shift-y = 'exec-and-forget /opt/homebrew/bin/kitty -1 -d ~ --title yazi -- zsh -c yazi'
     cmd-ctrl-alt-shift-enter = 'exec-and-forget /etc/profiles/per-user/shreeram/bin/kitty -1 --title debate-files -- zsh -c /Users/shreeram/.local/bin/debate-files'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
