@@ -62,3 +62,8 @@ path=("/opt/homebrew/opt/openjdk/bin" $path)
 
 # QMK tab completion
 # eval "$(register-python-argcomplete --no-defaults qmk)"
+
+# GPG
+
+export GPG_TTY=$(tty)
+gpg-connect-agent /bye 2>/dev/null
