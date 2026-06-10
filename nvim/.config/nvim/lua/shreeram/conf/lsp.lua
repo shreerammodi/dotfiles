@@ -114,8 +114,23 @@ null_ls.setup({
         null_ls.builtins.formatting.isort,
         null_ls.builtins.formatting.nixfmt,
         null_ls.builtins.formatting.prettier.with({
-            filetypes = { "markdown", "javascript" },
-            extra_args = { "--prose-wrap", "always", "--print-width", "80" }
+            -- Style/formatting is driven by each project's prettier config
+            -- (.prettierrc, .editorconfig). No hardcoded args here so nvim,
+            -- editors, and CI all produce identical output.
+            filetypes = {
+                "markdown",
+                "javascript",
+                "javascriptreact",
+                "typescript",
+                "typescriptreact",
+                "json",
+                "jsonc",
+                "css",
+                "scss",
+                "less",
+                "html",
+                "yaml",
+            },
         }),
         null_ls.builtins.formatting.rustywind,
         null_ls.builtins.formatting.stylua.with({
