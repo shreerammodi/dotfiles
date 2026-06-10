@@ -1,6 +1,6 @@
 return {
     "folke/trouble.nvim",
-    version = "3.7.1",
+    branch = "main",
     opts = {},
     cmd = "Trouble",
     keys = {
