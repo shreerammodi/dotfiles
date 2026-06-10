@@ -60,6 +60,17 @@ cmp.config.formatting = {}
 -- Necessary config for nvim-autopairs
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
+cmp.setup.filetype("markdown", {
+    sources = {
+        { name = "obsidian" },
+        { name = "obsidian_new" },
+        { name = "obsidian_tags" },
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        { name = "path" },
+    },
+})
+
 -- ledger.nvim account name completion
 cmp.setup.filetype("ledger", {
     sources = {
