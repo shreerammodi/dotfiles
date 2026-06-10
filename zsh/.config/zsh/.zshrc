@@ -60,6 +60,9 @@ path+=(~/.cargo/bin)
 # Adds homebrew openjdk install to path
 path=("/opt/homebrew/opt/openjdk/bin" $path)
 
+# Add lm studio to path
+path+=(~/.lmstudio/bin)
+
 # QMK tab completion
 # eval "$(register-python-argcomplete --no-defaults qmk)"
 
