@@ -1,10 +1,6 @@
 return {
     "obsidian-nvim/obsidian.nvim",
-    version = "3.14.2",
-    dependencies = {
-        "nvim-lua/plenary.nvim",
-    },
-    cmd = "Obsidian",
+    version = "*",
     keys = {
         { "<leader>nD", "<CMD>Obsidian today<CR>",        desc = "Today's daily" },
         { "<leader>nd", "<CMD>Obsidian dailies<CR>",      desc = "Daily notes" },
@@ -34,8 +30,5 @@ return {
         daily_notes = {
             folder = "daily/",
         },
-        ui = {
-            enable = false
-        }
     }
 }
