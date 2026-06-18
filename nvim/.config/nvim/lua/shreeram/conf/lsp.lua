@@ -1,9 +1,6 @@
-local lspconfig = require("lspconfig")
+local conform = require("conform")
 local mason = require("mason")
 local mason_lsp = require("mason-lspconfig")
-local null_ls = require("null-ls")
-local null_ls_helpers = require("null-ls.helpers")
-local lsp_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 vim.keymap.set({ "n", "x" }, "<leader>lr", function()
     vim.lsp.buf.rename()
@@ -12,41 +9,6 @@ end)
 vim.api.nvim_create_user_command("StopLSP", function()
     vim.lsp.Client:stop(vim.lsp.get_clients())
 end, {})
-
-mason.setup({
-    ensure_installed = {
-        "asmfmt",
-        "black",
-        "clang-format",
-        "isort",
-        "latexindent",
-        "markdownlint",
-        "nixfmt",
-        "prettierd",
-        "rustywind",
-        "shellcheck",
-        "shfmt",
-        "sqlfluff",
-        "tex-fmt",
-    },
-})
-
-mason_lsp.setup({
-    ensure_installed = {
-        "asm_lsp",
-        "bashls",
-        "clangd",
-        "eslint",
-        "gopls",
-        "html",
-        "jdtls",
-        "kotlin_language_server",
-        "lua_ls",
-        "pyright",
-        "texlab",
-        "ts_ls",
-    },
-})
 
 vim.lsp.enable("asm_lsp")
 
@@ -114,88 +76,23 @@ vim.lsp.enable("tailwindcss")
 
 vim.lsp.enable("ts_ls")
 
-null_ls.setup({
-    sources = {
-        null_ls.builtins.formatting.asmfmt,
-        null_ls.builtins.formatting.black,
-        null_ls.builtins.formatting.clang_format,
-        null_ls.builtins.formatting.isort,
-        null_ls.builtins.formatting.nixfmt,
-        null_ls.builtins.formatting.prettier.with({
-            -- Style/formatting is driven by each project's prettier config
-            -- (.prettierrc, .editorconfig). No hardcoded args here so nvim,
-            -- editors, and CI all produce identical output.
-            filetypes = {
-                "markdown",
-                "javascript",
-                "javascriptreact",
-                "typescript",
-                "typescriptreact",
-                "json",
-                "jsonc",
-                "css",
-                "scss",
-                "less",
-                "html",
-                "yaml",
-            },
-        }),
-        null_ls.builtins.formatting.rustywind,
-        null_ls.builtins.formatting.stylua.with({
-            condition = function(utils)
-                return utils.root_has_file({ "stylua.toml", ".stylua.toml" })
-            end,
-        }),
-        null_ls.builtins.diagnostics.markdownlint.with({
-            extra_args = { "--disable", "MD024" },
-        }),
-        null_ls.builtins.diagnostics.sqlfluff.with({
-            extra_args = { "--dialect", "sqlite" },
-        }),
-        {
-            name = "tex-fmt",
-            filetypes = { "tex" },
-            method = null_ls.methods.FORMATTING,
-            generator = null_ls_helpers.formatter_factory({
-                command = "tex-fmt",
-                args = { "--stdin", "--quiet" },
-                to_stdin = true,
-            }),
-        },
+conform.setup({
+    formatters_by_ft = {
+        c = { "clang-format" },
+        cpp = { "clang-format" },
+        css = { "prettier" },
+        html = { "prettier" },
+        javascript = { "prettier" },
+        json = { "prettier" },
+        latex = { "tex-fmt" },
+        lua = { "stylua" },
+        markdown = { "prettier", "markdownlint" },
+        python = { "isort", "black" },
+        typescript = { "prettier" },
     },
-    on_attach = function(client, bufnr)
-        if client:supports_method("textDocument/formatting") then
-            vim.api.nvim_clear_autocmds({ group = lsp_augroup, buffer = bufnr })
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                group = lsp_augroup,
-                buffer = bufnr,
-                callback = function()
-                    local first_line = vim.api.nvim_buf_get_lines(
-                        bufnr,
-                        0,
-                        1,
-                        false
-                    )[1] or ""
-                    if
-                        first_line:match("^%s*<!%-%-%s*Format:%s*OFF%s*%-%->")
-                    then
-                        return
-                    end
-                    -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-                    -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
-                    vim.lsp.buf.format()
-                end,
-            })
-        end
-    end,
-})
-
-vim.api.nvim_create_autocmd("BufWritePre", {
-    group = lsp_augroup,
-    buffer = bufnr,
-    callback = function()
-        -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-        -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
-        vim.lsp.buf.format({ async = false })
-    end,
+    format_on_save = {
+        -- These options will be passed to conform.format()
+        timeout_ms = 500,
+        lsp_format = "fallback",
+    },
 })
