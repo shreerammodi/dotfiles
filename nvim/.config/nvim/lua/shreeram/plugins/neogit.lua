@@ -1,13 +1,25 @@
 return {
     "NeogitOrg/neogit",
-    commit = "63124cf520ff24d09deb3b850e053908ab0fc66a",
+    lazy = true,
     dependencies = {
-        { "nvim-lua/plenary.nvim", lazy = true },
-        { "sindrets/diffview.nvim", lazy = true },
+        "esmuellert/codediff.nvim",
     },
-    config = function()
-        require("shreeram.conf.neogit")
-    end,
-    keys = { "<leader>gg" },
+    keys = {
+        {
+            "<leader>gg",
+            function()
+                require("neogit").open()
+            end,
+            desc = "Show Neogit UI",
+        },
+    },
     cmd = { "Neogit" },
+    opts = {
+        signs = {
+            -- { CLOSED, OPENED }
+            hunk = { "", "" },
+            item = { "", "" },
+            section = { "", "" },
+        },
+    },
 }
