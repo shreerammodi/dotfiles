@@ -19,6 +19,13 @@ return {
         frontmatter = {
             enabled = false
         },
+        note_id_func = function(title)
+            -- Use the note's title as its filename
+            if title ~= nil then
+                return title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", "")
+            end
+            return tostring(os.time())
+        end,
         legacy_commands = false,
         picker = { name = snacks },
         workspaces = {
