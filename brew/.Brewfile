@@ -22,6 +22,7 @@ brew "pandoc"
 brew "ripgrep"
 brew "stow"
 brew "tree"
+brew "tree-sitter-cli"
 brew "wget"
 brew "yazi"
 
