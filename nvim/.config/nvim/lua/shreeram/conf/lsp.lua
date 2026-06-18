@@ -40,7 +40,6 @@ mason_lsp.setup({
         "jdtls",
         "kotlin_language_server",
         "lua_ls",
-        "nil_ls",
         "pyright",
         "texlab",
         "ts_ls",
