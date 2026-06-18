@@ -8,8 +8,8 @@ local f = ls.function_node
 local c = ls.choice_node
 local d = ls.dynamic_node
 local r = ls.restore_node
-local events = require("luasnip.util.events")
 local ai = require("luasnip.nodes.absolute_indexer")
+local events = require("luasnip.util.events")
 local extras = require("luasnip.extras")
 local l = extras.lambda
 local rep = extras.rep
@@ -27,33 +27,33 @@ local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 
 return {
-	s(
-		"for",
-		fmt(
-			[[
+    s(
+        "for",
+        fmt(
+            [[
   for (int <v> = 0; <v> <>; <v>++) {
     <>
   }
       ]],
-			{
-				v = i(1, "i"),
-				i(2),
-				i(0),
-			},
-			{
-				delimiters = "<>",
-				repeat_duplicates = true,
-			}
-		)
-	),
-	s("print", {
-		t("System.out."),
-		c(1, {
-			t("print"),
-			t("println"),
-		}),
-		t("("),
-		i(0),
-		t(");"),
-	}),
+            {
+                v = i(1, "i"),
+                i(2),
+                i(0),
+            },
+            {
+                delimiters = "<>",
+                repeat_duplicates = true,
+            }
+        )
+    ),
+    s("print", {
+        t("System.out."),
+        c(1, {
+            t("print"),
+            t("println"),
+        }),
+        t("("),
+        i(0),
+        t(");"),
+    }),
 }
