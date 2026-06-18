@@ -1,30 +1,32 @@
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
+local map = vim.keymap.set
 
-vim.keymap.set({ "n", "x" }, "j", [[v:count ? "j" : "gj"]], { expr = true })
-vim.keymap.set({ "n", "x" }, "k", [[v:count ? "k" : "gk"]], { expr = true })
+map("v", "<", "<gv")
+map("v", ">", ">gv")
 
-vim.keymap.set("n", "<Leader>w", vim.cmd.write, { desc = "Write buffer" })
-vim.keymap.set("n", "<Leader>ww", vim.cmd.write, { desc = "Write buffer" })
-vim.keymap.set("n", "<Leader>wq", vim.cmd.wq, { desc = "Write buffer and quit" })
+map({ "n", "x" }, "j", [[v:count ? "j" : "gj"]], { expr = true })
+map({ "n", "x" }, "k", [[v:count ? "k" : "gk"]], { expr = true })
 
-vim.keymap.set("n", "<leader>co", vim.cmd.copen, { desc = "Open quickfixlist" })
-vim.keymap.set("n", "<leader>cn", vim.cmd.cnext, { desc = "Go to next error" })
-vim.keymap.set("n", "<leader>cp", vim.cmd.cprev, { desc = "Go to prev error" })
+map("n", "<Leader>w", vim.cmd.write, { desc = "Write buffer" })
+map("n", "<Leader>ww", vim.cmd.write, { desc = "Write buffer" })
+map("n", "<Leader>wq", vim.cmd.wq, { desc = "Write buffer and quit" })
 
-vim.keymap.set("i", "<C-l>", "<C-G>u<Esc>[s1z=`]a<C-G>u", { desc = "Correct spelling error" })
+map("n", "<leader>co", vim.cmd.copen, { desc = "Open quickfixlist" })
+map("n", "<leader>cn", vim.cmd.cnext, { desc = "Go to next error" })
+map("n", "<leader>cp", vim.cmd.cprev, { desc = "Go to prev error" })
 
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank into clipboard" })
-vim.keymap.set("n", "<leader>Y", [[<cmd>%y +<cr>]], { desc = "Yank buffer into clipboard" })
+map("i", "<C-l>", "<C-G>u<Esc>[s1z=`]a<C-G>u", { desc = "Correct spelling error" })
 
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete into _" })
+map({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank into clipboard" })
+map("n", "<leader>Y", [[<cmd>%y +<cr>]], { desc = "Yank buffer into clipboard" })
+
+map({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete into _" })
 
 -- Enables Command+V to paste on neovide
 -- See: https://github.com/neovide/neovide/issues/113
-vim.keymap.set({ "n", "v" }, "<D-v>", [["+p]])
-vim.keymap.set({ "i" }, "<D-v>", [[␒+]])
+map({ "n", "v" }, "<D-v>", [["+p]])
+map({ "i" }, "<D-v>", [[␒+]])
 
-vim.keymap.set("n", "<C-h>", "<C-w>h")
-vim.keymap.set("n", "<C-j>", "<C-w>j")
-vim.keymap.set("n", "<C-k>", "<C-w>k")
-vim.keymap.set("n", "<C-l>", "<C-w>l")
+map("n", "<C-h>", "<C-w>h")
+map("n", "<C-j>", "<C-w>j")
+map("n", "<C-k>", "<C-w>k")
+map("n", "<C-l>", "<C-w>l")
