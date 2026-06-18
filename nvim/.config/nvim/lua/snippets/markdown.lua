@@ -27,87 +27,87 @@ local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 
 return {
-  s("mi", fmta([[$<>$]], { i(1) })),
-  s(
-    "md",
-    fmta(
-      [[
+	s("mi", fmta([[$<>$]], { i(1) })),
+	s(
+		"md",
+		fmta(
+			[[
   $$
   <>
   $$
   ]],
-      { i(1) }
-    )
-  ),
-  s("pw", {
-    t("^{"),
-    i(1),
-    t("}"),
-  }),
-  s("_", {
-    t("_{"),
-    i(1),
-    t("}"),
-  }),
-  s("/", {
-    t("\\frac{"),
-    i(1),
-    t("}"),
-    t("{"),
-    i(2),
-    t("}"),
-  }),
-  s("*", {
-    t("\\cdot"),
-  }),
-  s("|", {
-    t("\\mid"),
-  }),
-  s(">>", {
-    t("\\rightarrow"),
-  }),
-  s("<<", {
-    t("\\leftarrow"),
-  }),
-  s("<>", {
-    t("\\leftrightarrow"),
-  }),
-  s("=>", {
-    t("\\implies"),
-  }),
-  s("<=", {
-    t("\\impliedby"),
-  }),
-  s(
-    "ali",
-    fmta(
-      [[
+			{ i(1) }
+		)
+	),
+	s("pw", {
+		t("^{"),
+		i(1),
+		t("}"),
+	}),
+	s("_", {
+		t("_{"),
+		i(1),
+		t("}"),
+	}),
+	s("/", {
+		t("\\frac{"),
+		i(1),
+		t("}"),
+		t("{"),
+		i(2),
+		t("}"),
+	}),
+	s("*", {
+		t("\\cdot"),
+	}),
+	s("|", {
+		t("\\mid"),
+	}),
+	s(">>", {
+		t("\\rightarrow"),
+	}),
+	s("<<", {
+		t("\\leftarrow"),
+	}),
+	s("<>", {
+		t("\\leftrightarrow"),
+	}),
+	s("=>", {
+		t("\\implies"),
+	}),
+	s("<=", {
+		t("\\impliedby"),
+	}),
+	s(
+		"ali",
+		fmta(
+			[[
       \begin{aligned}
       <>
       \end{aligned}
       ]],
-      {
-        i(0)
-      }
-    )
-  ),
-  s(
-    "beg",
-    fmta(
-      [[
+			{
+				i(0),
+			}
+		)
+	),
+	s(
+		"beg",
+		fmta(
+			[[
     \begin{<e>}<>
     <>
     \end{<e>}
       ]],
-      {
-        -- i(1) is at nodes[1], i(2) at nodes[2].
-        e = i(1),
-        i(2),
-        i(0),
-      },
-      {
-        repeat_duplicates = true,
-      }
-    )
-  ),
+			{
+				-- i(1) is at nodes[1], i(2) at nodes[2].
+				e = i(1),
+				i(2),
+				i(0),
+			},
+			{
+				repeat_duplicates = true,
+			}
+		)
+	),
 }

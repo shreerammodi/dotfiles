@@ -27,33 +27,33 @@ local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 
 return {
-  s(
-    "for",
-    fmt(
-      [[
+	s(
+		"for",
+		fmt(
+			[[
   for (int <v> = 0; <v> <>; <v>++) {
     <>
   }
       ]],
-      {
-        v = i(1, "i"),
-        i(2),
-        i(0),
-      },
-      {
-        delimiters = "<>",
-        repeat_duplicates = true,
-      }
-    )
-  ),
-  s("print", {
-    t("System.out."),
-    c(1, {
-      t("print"),
-      t("println"),
-    }),
-    t("("),
-    i(0),
-    t(");"),
-  }),
+			{
+				v = i(1, "i"),
+				i(2),
+				i(0),
+			},
+			{
+				delimiters = "<>",
+				repeat_duplicates = true,
+			}
+		)
+	),
+	s("print", {
+		t("System.out."),
+		c(1, {
+			t("print"),
+			t("println"),
+		}),
+		t("("),
+		i(0),
+		t(");"),
+	}),
 }
