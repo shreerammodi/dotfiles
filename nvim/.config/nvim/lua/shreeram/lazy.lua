@@ -15,28 +15,43 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
 require("lazy").setup({
     spec = "shreeram.plugins",
     dev = {
         path = "~/Documents/src/github.com",
         fallback = true,
     },
-    checker = {
-        enabled = false
-    },
     performance = {
         rtp = {
             disabled_plugins = {
-                "gzip",
-                "osc52",
-                "matchit",
-                "matchparen",
-                "rplugin",
-                "netrwPlugin",
-                "tarPlugin",
+                "2html_plugin",
                 "tohtml",
-                "tutor",
+                "getscript",
+                "getscriptPlugin",
+                "gzip",
+                "logipat",
+                "netrw",
+                "netrwPlugin",
+                "netrwSettings",
+                "netrwFileHandlers",
+                "matchit",
+                "tar",
+                "tarPlugin",
+                "rrhelper",
+                "spellfile_plugin",
+                "vimball",
+                "vimballPlugin",
+                "zip",
                 "zipPlugin",
+                "tutor",
+                "rplugin",
+                "syntax",
+                "synmenu",
+                "optwin",
+                "compiler",
+                "bugreport",
+                "ftplugin",
             },
         },
     },
