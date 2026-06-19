@@ -1,0 +1,6 @@
+require("smodi.plugins.ui")
+require("smodi.plugins.mini")
+require("smodi.plugins.editor")
+require("smodi.plugins.git")
+require("smodi.plugins.tools")
+require("smodi.plugins.tex")

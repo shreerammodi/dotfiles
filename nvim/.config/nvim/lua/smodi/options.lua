@@ -31,3 +31,5 @@ vim.opt.modeline = false
 vim.opt.termguicolors = true
 
 vim.o.guifont = "IBM Plex Mono:h12"
+
+vim.cmd("filetype plugin indent on")
