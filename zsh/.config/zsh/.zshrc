@@ -70,3 +70,7 @@ path+=(~/.lmstudio/bin)
 
 export GPG_TTY=$(tty)
 gpg-connect-agent /bye 2>/dev/null
+
+clip() {
+  osascript -e "set the clipboard to (POSIX file \"$PWD/$1\")"
+}
