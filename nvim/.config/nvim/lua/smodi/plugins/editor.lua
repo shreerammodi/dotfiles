@@ -96,7 +96,6 @@ cmp.setup({
             window = { border = "single" },
         },
     },
-    signature = { window = { border = "single" } },
     keymap = {
         preset = "default",
         ["<C-n>"] = { "select_next" },
@@ -105,4 +104,5 @@ cmp.setup({
         ["<Tab>"] = { "select_next", "fallback" },
         ["<C-Space>"] = { "show" },
     },
+    signature = { enabled = true, window = { border = "single" } },
 })
