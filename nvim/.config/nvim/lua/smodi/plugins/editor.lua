@@ -97,4 +97,12 @@ cmp.setup({
         },
     },
     signature = { window = { border = "single" } },
+    keymap = {
+        preset = "default",
+        ["<C-n>"] = { "select_next" },
+        ["<C-p>"] = { "select_prev", "fallback" },
+        ["<C-i>"] = { "accept", "snippet_forward", "fallback" },
+        ["<Tab>"] = { "select_next", "fallback" },
+        ["<C-Space>"] = { "show" },
+    },
 })
