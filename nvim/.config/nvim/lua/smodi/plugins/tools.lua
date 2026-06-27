@@ -1,6 +1,8 @@
 add({
     gh("dmtrKovalenko/fff.nvim"),
     gh("stevearc/oil.nvim"),
+    gh("folke/trouble.nvim"),
+    gh("folke/which-key.nvim"),
 })
 
 vim.api.nvim_create_autocmd("PackChanged", {
@@ -36,3 +38,7 @@ require("oil").setup({
 })
 
 map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+require("trouble").setup()
+
+require("which-key").setup()
