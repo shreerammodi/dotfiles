@@ -105,4 +105,5 @@ cmp.setup({
         ["<C-Space>"] = { "show" },
     },
     signature = { enabled = true, window = { border = "single" } },
+    sources = { default = { "lsp", "snippets", "path" } },
 })
