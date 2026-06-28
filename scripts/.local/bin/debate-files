@@ -1,0 +1,174 @@
+#!/usr/bin/env bash
+#
+# debate-files — fzf finder for the Dropbox Debate tree.
+#
+#   enter   open selected file(s)
+#   ctrl-o  reveal unique parent folder(s) in Finder
+#   ctrl-y  copy selected file(s) to a destination (second picker)
+#   ctrl-d  send selected file(s) to a Dropover shelf
+#
+# Exclusions live in ~/.config/debate-files/ignore (fd ignore-file syntax).
+# The file is created (seeded) only if missing; existing edits are never touched.
+
+set -euo pipefail
+
+# --- keybindings -------------------------------------------------------------
+# Customize the fzf keys here; they propagate to the prompts, headers, and
+# dispatch logic throughout the script. Use fzf key names (e.g. ctrl-o, alt-r).
+KEY_REVEAL="ctrl-e"    # main picker: reveal parent folder(s) in Finder
+KEY_COPY="ctrl-n"      # main picker: copy selection to a destination
+KEY_DROPOVER="ctrl-i"  # main picker: send selection to a Dropover shelf
+KEY_DESTPATH="ctrl-n"  # copy picker: use the typed query as a literal path
+
+ROOT="$HOME/Library/CloudStorage/Dropbox/Debate"
+CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/debate-files"
+IGNORE="$CONFIG_DIR/ignore"
+
+die() { printf 'debate-files: %s\n' "$1" >&2; exit 1; }
+
+# --- preflight ---------------------------------------------------------------
+command -v fd  >/dev/null 2>&1 || die "fd not found on PATH"
+command -v fzf >/dev/null 2>&1 || die "fzf not found on PATH"
+[[ -d "$ROOT" ]] || die "Debate folder not found at $ROOT"
+
+# Create the ignore file only if it does not already exist.
+if [[ ! -f "$IGNORE" ]]; then
+  mkdir -p "$CONFIG_DIR"
+  cat >"$IGNORE" <<'EOF'
+# debate-files exclusions — one fd ignore pattern per line.
+# Examples:  9---*/   excludes archive folders;  *.tmp   excludes a glob.
+.DS_Store
+~$*
+EOF
+fi
+
+cd "$ROOT"
+
+FD_LIST=(fd --type f --ignore-file "$IGNORE" --no-ignore-vcs)
+
+# Resolve a relative selection (from fzf) to an absolute path under ROOT.
+abspath() { printf '%s/%s\n' "$ROOT" "$1"; }
+
+# --- main picker -------------------------------------------------------------
+out=$(
+  "${FD_LIST[@]}" \
+    | fzf --multi \
+          --expect="$KEY_REVEAL,$KEY_COPY,$KEY_DROPOVER" \
+          --prompt="Debate > " \
+          --height=100% \
+          --layout=reverse \
+          --border \
+          --header="enter: open   $KEY_REVEAL: reveal in Finder   $KEY_COPY: copy to…   $KEY_DROPOVER: Dropover shelf" \
+) || true
+
+[[ -z "$out" ]] && exit 0
+
+# With --expect the first line is the key pressed (empty = enter); rest = files.
+key=$(printf '%s\n' "$out" | sed -n '1p')
+files=$(printf '%s\n' "$out" | sed -n '2,$p')
+
+[[ -z "$files" ]] && exit 0
+
+# --- actions -----------------------------------------------------------------
+
+action_open() {
+  local full
+  while IFS= read -r f; do
+    [[ -z "$f" ]] && continue
+    full=$(abspath "$f")
+    case "$f" in
+      *.docx) open "$full" -a cardmirror ;;
+      *)      open "$full" ;;
+    esac
+  done <<<"$files"
+}
+
+action_reveal() {
+  # Dedupe to unique parent folders, then open each one.
+  while IFS= read -r f; do
+    [[ -n "$f" ]] && dirname "$(abspath "$f")"
+  done <<<"$files" | sort -u | while IFS= read -r d; do
+    open "$d"
+  done
+}
+
+action_dropover() {
+  # Hand every selected file to Dropover, which gathers them onto one shelf.
+  local paths=() count=0
+  while IFS= read -r f; do
+    [[ -z "$f" ]] && continue
+    paths+=("$(abspath "$f")")
+    count=$((count + 1))
+  done <<<"$files"
+  [[ "$count" -eq 0 ]] && return
+  open -a Dropover "${paths[@]}"
+  printf 'Sent %d file(s) to a Dropover shelf\n' "$count"
+}
+
+# Copy a single file into $1, auto-suffixing "name N.ext" on collision.
+copy_one() {
+  local src="$1" dst_dir="$2" base name ext target n
+  base=$(basename "$src")
+  target="$dst_dir/$base"
+  if [[ -e "$target" ]]; then
+    if [[ "$base" == *.* ]]; then
+      name="${base%.*}"; ext=".${base##*.}"
+    else
+      name="$base"; ext=""
+    fi
+    n=2
+    while target="$dst_dir/$name $n$ext"; [[ -e "$target" ]]; do
+      n=$((n + 1))
+    done
+  fi
+  cp -p "$src" "$target"
+}
+
+action_copy() {
+  # Second picker: choose a destination directory under ROOT.
+  # KEY_DESTPATH uses the typed query as a literal path (created if missing).
+  local dout query dkey dsel dest
+  dout=$(
+    fd --type d --ignore-file "$IGNORE" --no-ignore-vcs \
+      | fzf --print-query \
+            --expect="$KEY_DESTPATH" \
+            --prompt="Copy to > " \
+            --height=100% \
+            --layout=reverse \
+            --border \
+            --header="enter: copy into folder   $KEY_DESTPATH: use typed path (created if needed)"
+  ) || { echo "Cancelled."; return; }
+
+  query=$(printf '%s\n' "$dout" | sed -n '1p')
+  dkey=$(printf '%s\n' "$dout" | sed -n '2p')
+  dsel=$(printf '%s\n' "$dout" | sed -n '3p')
+
+  if [[ "$dkey" == "$KEY_DESTPATH" ]]; then
+    [[ -z "$query" ]] && { echo "Cancelled."; return; }
+    case "$query" in
+      /*)  dest="$query" ;;
+      \~*) dest="${query/#\~/$HOME}" ;;
+      *)   dest="$ROOT/$query" ;;     # relative → under Debate root
+    esac
+  else
+    [[ -z "$dsel" ]] && { echo "Cancelled."; return; }
+    dest="$ROOT/$dsel"
+  fi
+
+  mkdir -p "$dest"
+
+  local count=0
+  while IFS= read -r f; do
+    [[ -z "$f" ]] && continue
+    copy_one "$(abspath "$f")" "$dest"
+    count=$((count + 1))
+  done <<<"$files"
+  printf 'Copied %d file(s) to %s\n' "$count" "$dest"
+}
+
+case "$key" in
+  "$KEY_REVEAL")   action_reveal ;;
+  "$KEY_COPY")     action_copy ;;
+  "$KEY_DROPOVER") action_dropover ;;
+  *)               action_open ;;
+esac
