@@ -17,7 +17,7 @@ set -euo pipefail
 # dispatch logic throughout the script. Use fzf key names (e.g. ctrl-o, alt-r).
 KEY_REVEAL="ctrl-e"    # main picker: reveal parent folder(s) in Finder
 KEY_COPY="ctrl-n"      # main picker: copy selection to a destination
-KEY_DROPOVER="ctrl-i"  # main picker: send selection to a Dropover shelf
+KEY_DROPOVER="ctrl-o"  # main picker: send selection to a Dropover shelf
 KEY_DESTPATH="ctrl-n"  # copy picker: use the typed query as a literal path
 
 ROOT="$HOME/Library/CloudStorage/Dropbox/Debate"
