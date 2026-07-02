@@ -74,3 +74,9 @@ gpg-connect-agent /bye 2>/dev/null
 clip() {
   osascript -e "set the clipboard to (POSIX file \"$PWD/$1\")"
 }
+
+# fnm
+FNM_PATH="/opt/homebrew/opt/fnm/bin"
+if [ -d "$FNM_PATH" ]; then
+  eval "$(fnm env --shell zsh --use-on-cd --version-file-strategy=recursive --resolve-engines)"
+fi
