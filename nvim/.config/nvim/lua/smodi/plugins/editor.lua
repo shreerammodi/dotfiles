@@ -52,6 +52,7 @@ vim.lsp.enable({
     "markdownlint",
     "oxlint",
     "pyright",
+    "tailwindcss-language-server",
     "texlab",
     "ts_ls",
 })
