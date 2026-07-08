@@ -19,3 +19,5 @@ require("mini.pairs").setup({
     -- and there are more closing pairs than opening pairs
     skip_unbalanced = true,
 })
+
+require("mini.align").setup()
