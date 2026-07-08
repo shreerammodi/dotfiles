@@ -387,16 +387,21 @@ hyper = "Alt + Ctrl + Shift + Meta"
 
 "hyper + Z" = "toggle_space_activated"
 
-"hyper + I" = "next_workspace"
-"hyper + O" = "prev_workspace"
-# Move across displays: focus with Alt+I/O, carry the window with Shift added.
-# Directional selectors ("left"/"right") survive monitor re-arrangement,
-# unlike fixed indices.
-"Alt + I" = { focus_display = "right" }
-"Alt + O" = { focus_display = "left" }
+# ── Core rule: hyper moves my FOCUS, Alt carries the focused WINDOW ──
 
-"Alt + Shift + I" = { move_window_to_display = { selector = "right" } }
-"Alt + Shift + O" = { move_window_to_display = { selector = "left" } }
+# Displays: hyper looks over, Alt throws the window over.
+# I = left display, O = right display (spatially matches H..L).
+"hyper + I" = { focus_display = "left" }
+"hyper + O" = { focus_display = "right" }
+"Alt + I" = { move_window_to_display = { selector = "left" } }
+"Alt + O" = { move_window_to_display = { selector = "right" } }
+
+# Cycle workspaces on the focused display (N = next, P = prev)
+"hyper + N" = "next_workspace"
+"hyper + P" = "prev_workspace"
+
+# Jump to the previously-focused workspace (back-and-forth)
+"hyper + Tab" = "switch_to_last_workspace"
 
 "hyper + H" = { move_focus = "left" }
 "hyper + J" = { move_focus = "down" }
