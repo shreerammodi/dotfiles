@@ -1,36 +1,26 @@
 add({
-    gh("dmtrKovalenko/fff.nvim"),
     gh("stevearc/oil.nvim"),
     gh("folke/trouble.nvim"),
     gh("folke/which-key.nvim"),
+    gh("nvim-telescope/telescope.nvim"),
+    gh("nvim-lua/plenary.nvim")
 })
 
-vim.api.nvim_create_autocmd("PackChanged", {
-    callback = function(ev)
-        local name, kind = ev.data.spec.name, ev.data.kind
-        if name == "fff.nvim" and kind == "update" then
-            if not ev.data.active then
-                vim.cmd.packadd("fff.nvim")
-            end
-            require("fff.download").download_or_build_binary()
-        end
-    end,
-})
+local builtin = require("telescope.builtin")
 
-require("fff").setup()
+map("n", "<leader>.", function() builtin.find_files() end, { desc = "Find File" })
+map("n", "<leader>ff", function() builtin.find_files() end, { desc = "Find File" })
 
-local fff = require("fff")
+map("n", "<leader><leader>", function() builtin.git_files() end, { desc = "Find Project File" })
+map("n", "<leader>pf", function() builtin.git_files() end, { desc = "Find Project File" })
 
-map("n", "<leader><leader>", function()
-    fff.find_files()
-end, { desc = "Find File" })
-map("n", "<leader>ff", function()
-    fff.find_files()
-end, { desc = "Find File" })
+map("n", "<leader>/", function() builtin.live_grep() end, { desc = "Grep" })
 
-map("n", "<leader>/", function()
-    require("fff").live_grep({ grep = { modes = { "fuzzy", "plain" } } })
-end, { desc = "Live Grep" })
+map({"n","x"}, "<leader>sw", function() builtin.grep_string() end, {desc = "Grep word"})
+
+map("n", '<leader>s"', function() builtin.registers() end, {desc = "Registers"})
+
+map("n", "<leader>,", function() builtin.buffers() end, { desc = "Buffers" })
 
 require("oil").setup({
     default_file_explorer = true,
