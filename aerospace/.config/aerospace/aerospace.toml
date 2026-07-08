@@ -114,14 +114,17 @@ on-mode-changed = []
     cmd-ctrl-alt-shift-semicolon = 'exec-and-forget open -na Ghostty --args --title=debate-files -e zsh -c /Users/shreeram/.local/bin/debate-files'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-    cmd-ctrl-alt-shift-o = 'layout tiles horizontal vertical'
-    cmd-ctrl-alt-shift-a = 'layout accordion horizontal vertical'
+    cmd-ctrl-alt-shift-r = 'layout horizontal vertical' # rotate orientation
+    cmd-ctrl-alt-shift-s = 'layout accordion tiles' # toggle stack (accordion) layout
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-    cmd-ctrl-alt-shift-h = 'focus left'
-    cmd-ctrl-alt-shift-j = 'focus down'
-    cmd-ctrl-alt-shift-k = 'focus up'
-    cmd-ctrl-alt-shift-l = 'focus right'
+    cmd-ctrl-alt-shift-h = 'focus --boundaries-action wrap-around-the-workspace left'
+    cmd-ctrl-alt-shift-j = 'focus --boundaries-action wrap-around-the-workspace down'
+    cmd-ctrl-alt-shift-k = 'focus --boundaries-action wrap-around-the-workspace up'
+    cmd-ctrl-alt-shift-l = 'focus --boundaries-action wrap-around-the-workspace right'
+
+    # See: https://nikitabobko.github.io/AeroSpace/commands#focus-monitor
+    cmd-ctrl-alt-shift-d = 'focus-monitor --wrap-around next' # swap focus between displays
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
     alt-shift-h = 'move left'
@@ -141,6 +144,12 @@ on-mode-changed = []
     cmd-ctrl-alt-shift-f = 'fullscreen'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
+    cmd-ctrl-alt-shift-i = 'workspace --wrap-around next'
+    cmd-ctrl-alt-shift-o = 'workspace --wrap-around prev'
+    alt-shift-i = 'move-node-to-workspace --wrap-around next'
+    alt-shift-o = 'move-node-to-workspace --wrap-around prev'
+
+    cmd-ctrl-alt-shift-0 = 'workspace 0'
     cmd-ctrl-alt-shift-1 = 'workspace 1'
     cmd-ctrl-alt-shift-2 = 'workspace 2'
     cmd-ctrl-alt-shift-3 = 'workspace 3'
@@ -150,21 +159,9 @@ on-mode-changed = []
     cmd-ctrl-alt-shift-7 = 'workspace 7'
     cmd-ctrl-alt-shift-8 = 'workspace 8'
     cmd-ctrl-alt-shift-9 = 'workspace 9'
-    cmd-ctrl-alt-shift-b = 'workspace B'
-    cmd-ctrl-alt-shift-c = 'workspace C'
-    cmd-ctrl-alt-shift-d = 'workspace D'
-    cmd-ctrl-alt-shift-e = 'workspace E'
-    cmd-ctrl-alt-shift-g = 'workspace G'
-    cmd-ctrl-alt-shift-n = 'workspace N'
-    cmd-ctrl-alt-shift-r = 'workspace R'
-    cmd-ctrl-alt-shift-s = 'workspace S'
-    cmd-ctrl-alt-shift-u = 'workspace U'
-    cmd-ctrl-alt-shift-v = 'workspace V'
-    cmd-ctrl-alt-shift-w = 'workspace W'
-    cmd-ctrl-alt-shift-x = 'workspace X'
-    cmd-ctrl-alt-shift-z = 'workspace Z'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
+    alt-shift-0 = 'move-node-to-workspace 0'
     alt-shift-1 = 'move-node-to-workspace 1'
     alt-shift-2 = 'move-node-to-workspace 2'
     alt-shift-3 = 'move-node-to-workspace 3'
@@ -174,27 +171,15 @@ on-mode-changed = []
     alt-shift-7 = 'move-node-to-workspace 7'
     alt-shift-8 = 'move-node-to-workspace 8'
     alt-shift-9 = 'move-node-to-workspace 9'
-    alt-shift-b = 'move-node-to-workspace B'
-    alt-shift-c = 'move-node-to-workspace C'
-    alt-shift-d = 'move-node-to-workspace D'
-    alt-shift-e = 'move-node-to-workspace E'
-    alt-shift-g = 'move-node-to-workspace G'
-    alt-shift-n = 'move-node-to-workspace N'
-    alt-shift-r = 'move-node-to-workspace R'
-    alt-shift-s = 'move-node-to-workspace S'
-    alt-shift-u = 'move-node-to-workspace U'
-    alt-shift-v = 'move-node-to-workspace V'
-    alt-shift-w = 'move-node-to-workspace W'
-    alt-shift-x = 'move-node-to-workspace X'
-    alt-shift-z = 'move-node-to-workspace Z'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     # cmd-ctrl-alt-shift-i = 'workspace-back-and-forth'
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
-    cmd-ctrl-alt-shift-i = 'move-workspace-to-monitor --wrap-around next'
+    cmd-ctrl-alt-shift-n = 'move-workspace-to-monitor --wrap-around next'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-shift-semicolon = 'mode service'
+    cmd-ctrl-alt-shift-w = 'mode resize'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -212,11 +197,15 @@ on-mode-changed = []
     alt-shift-k = ['join-with up', 'mode main']
     alt-shift-l = ['join-with right', 'mode main']
 
+# 'resize' binding mode declaration.
+[mode.resize.binding]
+    h = 'resize width -50'
+    j = 'resize height +50'
+    k = 'resize height -50'
+    l = 'resize width +50'
+    enter = 'mode main'
+    esc = 'mode main'
+
 [[on-window-detected]]
     if.app-id = 'org.keepassxc.keepassxc'
     run = 'layout floating'
-
-[[on-window-detected]]
-    if.app-id = 'net.kovidgoyal.kitty'
-    if.window-title-regex-substring = 'debate-files'
-    run = ['layout floating', 'fullscreen on']
