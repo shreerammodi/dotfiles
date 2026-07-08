@@ -108,10 +108,10 @@ on-mode-changed = []
     # end tell'
     # '''
 
-    cmd-ctrl-alt-shift-t = 'exec-and-forget /opt/homebrew/bin/kitty -1 -d ~'
-    cmd-ctrl-alt-shift-m = 'exec-and-forget /opt/homebrew/bin/kitty -1 -d ~ --title neomutt -- zsh -c neomutt'
-    cmd-ctrl-alt-shift-y = 'exec-and-forget /opt/homebrew/bin/kitty -1 -d ~ --title yazi -- zsh -c yazi'
-    cmd-ctrl-alt-shift-semicolon = 'exec-and-forget /opt/homebrew/bin/kitty -1 --title debate-files -- zsh -c /Users/shreeram/.local/bin/debate-files'
+    cmd-ctrl-alt-shift-t = 'exec-and-forget open -na Ghostty --args --working-directory=/Users/shreeram'
+    cmd-ctrl-alt-shift-m = 'exec-and-forget open -na Ghostty --args --working-directory=/Users/shreeram --title=neomutt -e zsh -c neomutt'
+    cmd-ctrl-alt-shift-y = 'exec-and-forget open -na Ghostty --args --working-directory=/Users/shreeram --title=yazi -e zsh -c yazi'
+    cmd-ctrl-alt-shift-semicolon = 'exec-and-forget open -na Ghostty --args --title=debate-files -e zsh -c /Users/shreeram/.local/bin/debate-files'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
     cmd-ctrl-alt-shift-o = 'layout tiles horizontal vertical'
