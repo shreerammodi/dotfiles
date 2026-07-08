@@ -27,11 +27,11 @@ require("conform").setup({
         toml = { "oxfmt" },
         yaml = { "oxfmt" },
     },
-    format_on_save = {
-        timeout_ms = 500,
-        lsp_format = "fallback",
-    },
 })
+
+map({ "n" }, "<leader>lf", function()
+    require("conform").format()
+end, { desc = "Format buffer" })
 
 vim.lsp.config("texlab", {
     settings = {
