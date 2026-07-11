@@ -18,11 +18,14 @@
 font-family = IBM Plex Mono
 font-thicken = true
 
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 cursor-invert-fg-bg = true
 
 macos-titlebar-style = hidden
 macos-option-as-alt = true
+macos-window-shadow = false
+
+confirm-close-surface = false
 
 # Config syntax crash course
 # ==========================

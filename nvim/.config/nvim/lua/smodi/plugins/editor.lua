@@ -54,6 +54,7 @@ vim.lsp.enable({
     "pyright",
     "tailwindcss-language-server",
     "texlab",
+    "tinymist",
     "ts_ls",
 })
 
