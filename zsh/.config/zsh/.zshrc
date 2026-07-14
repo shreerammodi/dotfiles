@@ -4,19 +4,10 @@
 [ -f ~/.config/zsh/fzf-tab-config.zsh ] && source ~/.config/zsh/fzf-tab-config.zsh
 
 alias b="buku --suggest"
-alias e="eza"
-alias ea="eza --all"
-alias el="eza --long --header --git --icons --classify --all"
-alias et="eza --tree --level=2 --long --header --git --icons --classify --all"
+alias ls="eza"
+alias ll="eza --long --header --git --icons --classify --all"
 alias lg="lazygit"
-alias hl="hledger"
-alias hl-roi='hledger roi --pretty --value=end,$ --infer-market-prices \
-    --inv "assets:brokerage:individual" \
-    --inv "assets:retirement:roth" \
-    --pnl "income:capitalgains" \
-    --pnl "income:dividends"'
-alias rem="reminders"
-alias spt="spotify_player"
+alias sp="sesh picker"
 
 setopt globdots
 setopt autocd
