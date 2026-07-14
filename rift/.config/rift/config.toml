@@ -1,0 +1,42 @@
+# rift config - tiling engine only.
+# All keybindings live in skhd (modal layer), which drives rift via rift-cli.
+# See skhd/.config/skhd/skhdrc.
+
+[settings]
+# manage every space automatically (rift's default is deactivated-until-toggled,
+# and our [keys] is empty so the toggle binding does not exist)
+default_disable = false
+focus_follows_mouse = false
+mouse_follows_focus = true
+mouse_hides_on_focus = false
+run_on_start = [
+  "borders active_color=0xffc6daff inactive_color=0xff646464 width=5.0"
+]
+
+[settings.ui.mission_control]
+enabled = true
+
+[settings.ui.menu_bar]
+enabled = true
+
+[settings.layout]
+mode = "traditional"
+
+[settings.layout.gaps.outer]
+top = 5
+left = 5
+bottom = 5
+right = 5
+
+[settings.layout.gaps.inner]
+horizontal = 5
+vertical = 5
+
+[virtual_workspaces]
+enabled = true
+default_workspace_count = 9
+app_rules = [
+  { app_id = "org.keepassxc.keepassxc", floating = true }
+]
+
+[keys]
