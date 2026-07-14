@@ -108,21 +108,21 @@ on-mode-changed = []
     # end tell'
     # '''
 
-    cmd-ctrl-alt-shift-t = 'exec-and-forget open -a Ghostty'
-    cmd-ctrl-alt-shift-semicolon = 'exec-and-forget open -na Ghostty --args --title=debate-files -e zsh -c /Users/shreeram/.local/bin/debate-files'
+    alt-t = 'exec-and-forget open -a Ghostty'
+    alt-semicolon = 'exec-and-forget open -na Ghostty --args --title=debate-files -e zsh -c /Users/shreeram/.local/bin/debate-files'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-    cmd-ctrl-alt-shift-r = 'layout horizontal vertical' # rotate orientation
-    cmd-ctrl-alt-shift-s = 'layout accordion tiles' # toggle stack (accordion) layout
+    alt-r = 'layout horizontal vertical' # rotate orientation
+    alt-s = 'layout accordion tiles' # toggle stack (accordion) layout
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-    cmd-ctrl-alt-shift-h = 'focus --boundaries-action wrap-around-the-workspace left'
-    cmd-ctrl-alt-shift-j = 'focus --boundaries-action wrap-around-the-workspace down'
-    cmd-ctrl-alt-shift-k = 'focus --boundaries-action wrap-around-the-workspace up'
-    cmd-ctrl-alt-shift-l = 'focus --boundaries-action wrap-around-the-workspace right'
+    alt-h = 'focus --boundaries-action wrap-around-the-workspace left'
+    alt-j = 'focus --boundaries-action wrap-around-the-workspace down'
+    alt-k = 'focus --boundaries-action wrap-around-the-workspace up'
+    alt-l = 'focus --boundaries-action wrap-around-the-workspace right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus-monitor
-    cmd-ctrl-alt-shift-d = 'focus-monitor --wrap-around next' # swap focus between displays
+    alt-d = 'focus-monitor --wrap-around next' # swap focus between displays
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
     alt-shift-h = 'move left'
@@ -130,33 +130,33 @@ on-mode-changed = []
     alt-shift-k = 'move up'
     alt-shift-l = 'move right'
 
-    cmd-ctrl-alt-shift-left  = 'join-with left'
-    cmd-ctrl-alt-shift-down  = 'join-with down'
-    cmd-ctrl-alt-shift-up    = 'join-with up'
-    cmd-ctrl-alt-shift-right = 'join-with right'
+    alt-left  = 'join-with left'
+    alt-down  = 'join-with down'
+    alt-up    = 'join-with up'
+    alt-right = 'join-with right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-    cmd-ctrl-alt-shift-minus = 'resize smart -50'
-    cmd-ctrl-alt-shift-equal = 'resize smart +50'
+    alt-minus = 'resize smart -50'
+    alt-equal = 'resize smart +50'
 
-    cmd-ctrl-alt-shift-f = 'fullscreen'
+    alt-f = 'fullscreen'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-    cmd-ctrl-alt-shift-i = 'workspace --wrap-around next'
-    cmd-ctrl-alt-shift-o = 'workspace --wrap-around prev'
+    alt-i = 'workspace --wrap-around next'
+    alt-o = 'workspace --wrap-around prev'
     alt-shift-i = 'move-node-to-workspace --wrap-around next'
     alt-shift-o = 'move-node-to-workspace --wrap-around prev'
 
-    cmd-ctrl-alt-shift-0 = 'workspace 0'
-    cmd-ctrl-alt-shift-1 = 'workspace 1'
-    cmd-ctrl-alt-shift-2 = 'workspace 2'
-    cmd-ctrl-alt-shift-3 = 'workspace 3'
-    cmd-ctrl-alt-shift-4 = 'workspace 4'
-    cmd-ctrl-alt-shift-5 = 'workspace 5'
-    cmd-ctrl-alt-shift-6 = 'workspace 6'
-    cmd-ctrl-alt-shift-7 = 'workspace 7'
-    cmd-ctrl-alt-shift-8 = 'workspace 8'
-    cmd-ctrl-alt-shift-9 = 'workspace 9'
+    alt-0 = 'workspace 0'
+    alt-1 = 'workspace 1'
+    alt-2 = 'workspace 2'
+    alt-3 = 'workspace 3'
+    alt-4 = 'workspace 4'
+    alt-5 = 'workspace 5'
+    alt-6 = 'workspace 6'
+    alt-7 = 'workspace 7'
+    alt-8 = 'workspace 8'
+    alt-9 = 'workspace 9'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-0 = 'move-node-to-workspace 0'
@@ -171,13 +171,13 @@ on-mode-changed = []
     alt-shift-9 = 'move-node-to-workspace 9'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-    # cmd-ctrl-alt-shift-i = 'workspace-back-and-forth'
+    # alt-i = 'workspace-back-and-forth'
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
-    cmd-ctrl-alt-shift-n = 'move-workspace-to-monitor --wrap-around next'
+    alt-n = 'move-workspace-to-monitor --wrap-around next'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-shift-semicolon = 'mode service'
-    cmd-ctrl-alt-shift-w = 'mode resize'
+    alt-w = 'mode resize'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
