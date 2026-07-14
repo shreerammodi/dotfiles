@@ -64,6 +64,9 @@ cmp.build():pwait()
 
 cmp.setup({
     completion = {
+        list = {
+            selection = { preselect = false, auto_insert = true },
+        },
         menu = {
             auto_show = true,
             border = "single",
@@ -104,6 +107,8 @@ cmp.setup({
         ["<C-p>"] = { "select_prev", "fallback" },
         ["<C-i>"] = { "accept", "snippet_forward", "fallback" },
         ["<Tab>"] = { "select_next", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "fallback" },
+        ["<CR>"] = { "select_and_accept", "fallback" },
         ["<C-Space>"] = { "show" },
     },
     signature = { enabled = true, window = { border = "single" } },
