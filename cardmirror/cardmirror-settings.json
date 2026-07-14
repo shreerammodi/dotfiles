@@ -1,0 +1,623 @@
+{
+  "version": 1,
+  "settings": {
+    "navWidth": 300,
+    "navMaxLevel": 3,
+    "showOnboardingStarter": false,
+    "defaultSpeechDocFolder": "",
+    "defaultSpeechDocFormat": "docx",
+    "defaultSaveFormat": "docx",
+    "prefixPresetSaveFilenames": true,
+    "sendDocPrefix": "[S] ",
+    "readDocPrefix": "[R] ",
+    "markedDocPrefix": "[M] ",
+    "sendDocDestination": "fixedFolder",
+    "sendDocFolder": "/Users/shreeram/smodi/tmp/send-docs",
+    "markedCardsDestination": "fixedFolder",
+    "markedCardsFolder": "/Users/shreeram/smodi/tmp/send-docs",
+    "theme": "system",
+    "themeAppliesToDocument": false,
+    "iconSet": "modern",
+    "showDocNameChip": false,
+    "showUndoRedoButtons": false,
+    "checkForUpdatesOnLaunch": true,
+    "commentsColumnWidth": 320,
+    "reduceMotion": "auto",
+    "disableCursorBlink": false,
+    "accessibilityTreeEnabled": false,
+    "flowHostOnLaunch": false,
+    "overrideHighlightColor": false,
+    "overrideHighlightSlots": [
+      "#ffff00"
+    ],
+    "overrideShadingColor": false,
+    "showCursorColorNames": false,
+    "colorVisionFriendly": false,
+    "annotationShapes": false,
+    "distinguishShading": false,
+    "navAnalyticItalics": false,
+    "overrideShadingSlots": [
+      "#d2d2d2"
+    ],
+    "customColorOverrides": {},
+    "formatNavPaneByType": true,
+    "timerProfile": "college",
+    "timerProfiles": {
+      "highSchool": {
+        "speechPresets": [
+          3,
+          5,
+          8
+        ],
+        "prepMinutes": 8
+      },
+      "college": {
+        "speechPresets": [
+          3,
+          6,
+          9
+        ],
+        "prepMinutes": 10
+      },
+      "pomodoro": {
+        "speechPresets": [
+          25,
+          15,
+          5
+        ],
+        "prepMinutes": 0
+      }
+    },
+    "timerSpeechPresets": [
+      3,
+      6,
+      9
+    ],
+    "timerPrepMinutes": 10,
+    "timerFlashEnabled": true,
+    "timerFlashSeconds": [
+      5,
+      3,
+      1
+    ],
+    "timerCompact": false,
+    "timerPrepLabel": "both",
+    "timerPosition": "left",
+    "jumpToDocTopOnReadModeToggle": false,
+    "findResultsExpanded": false,
+    "findRememberLastQuery": false,
+    "findLastQuery": "",
+    "findCategoryOrder": [
+      "heading",
+      "tag",
+      "analytic",
+      "undertag",
+      "cite",
+      "other"
+    ],
+    "includeSpeechDocPocket": true,
+    "showCitePreview": true,
+    "showCardNumbering": true,
+    "showNumberingButtons": true,
+    "cardNumberingFormat": "period",
+    "cardNumberingSubFormat": "paren",
+    "cardNumberingSubCapitalized": false,
+    "cardNumberingIndent": "off",
+    "cardNumberingSubIndent": "off",
+    "cardNumberingMatchHeadingColor": false,
+    "flashcardDueDot": true,
+    "editorSpellcheck": false,
+    "smartQuotes": true,
+    "customDashEnabled": false,
+    "enterAfterPocket": "normal",
+    "enterAfterHat": "normal",
+    "enterAfterBlock": "normal",
+    "enterAfterTag": "normal",
+    "enterAfterAnalytic": "analytic",
+    "enterAfterUndertag": "normal",
+    "customDashStyle": "em",
+    "customDashTrigger": "---",
+    "voiceInputDeviceId": "",
+    "voiceAutoSleepSeconds": 60,
+    "voiceDashStyle": "em",
+    "voiceDictationModel": "standard",
+    "hideEmphasisBordersInReadMode": false,
+    "markUnreadAfterMarker": true,
+    "defaultZoomPct": 100,
+    "chromeScalePct": 100,
+    "gestureZoom": false,
+    "readers": [
+      {
+        "name": "Reader 1",
+        "wpm": 200
+      },
+      {
+        "name": "Reader 2",
+        "wpm": 250
+      }
+    ],
+    "liveSelectionWordCount": false,
+    "displaySizes": {
+      "normal": 11,
+      "pocket": 26,
+      "hat": 22,
+      "block": 16,
+      "tag": 13,
+      "analytic": 13,
+      "cite": 14,
+      "underline": 11,
+      "emphasis": 12,
+      "undertag": 11
+    },
+    "displayParagraphSpacing": {
+      "bodyBefore": 0,
+      "bodyAfter": 0,
+      "citeBefore": 0,
+      "citeAfter": 0,
+      "tagBefore": 2,
+      "tagAfter": 0,
+      "analyticBefore": 2,
+      "analyticAfter": 0,
+      "pocketBefore": 12,
+      "pocketAfter": 0,
+      "hatBefore": 13,
+      "hatAfter": 2,
+      "blockBefore": 12,
+      "blockAfter": 2,
+      "undertagBefore": 0,
+      "undertagAfter": 0
+    },
+    "displayTypography": {
+      "citeUnderlined": false,
+      "underlineBold": false,
+      "emphasisBold": true,
+      "emphasisItalic": false,
+      "emphasisBox": true,
+      "emphasisBoxSize": 1.25,
+      "undertagItalic": true,
+      "undertagBold": false
+    },
+    "displayColors": {
+      "analytic": "#655979",
+      "undertag": "#385623",
+      "readingMarker": "#ff0000",
+      "zoneDiverged": "#c0504d"
+    },
+    "bodyFont": "Calibri",
+    "uiFont": "",
+    "ribbonTooltipMode": "both",
+    "showDropzonePill": false,
+    "showQuickCardButtons": true,
+    "fileSearchRoots": [
+      "/Users/shreeram/Library/CloudStorage/Dropbox/Debate"
+    ],
+    "fileSearchFormats": "both",
+    "fileSearchObjectTypes": [
+      "block",
+      "tag"
+    ],
+    "fileSearchOutlineDepth": 3,
+    "fileSearchTiebreak": "recency",
+    "pinAutoEnabled": true,
+    "lineHeight": 1.3,
+    "lineHeightCite": 1.2,
+    "lineHeightTag": 1.2,
+    "lineHeightAnalytic": 1.2,
+    "lineHeightHeading": 1.2,
+    "lineHeightUndertag": 1.2,
+    "formattingPanelMode": "labels",
+    "formattingPanelPreview": true,
+    "showCharacterStyles": true,
+    "lastHighlightColor": "cyan",
+    "lastShadingColor": "C0C0C0",
+    "lastFontColor": "000000",
+    "paragraphIntegrity": true,
+    "usePilcrows": true,
+    "extractUndertagInQuotes": false,
+    "headingMode": "respect",
+    "condenseOnPaste": false,
+    "formattingGapClass": "both",
+    "autoBridgeFormattingGaps": true,
+    "clearFormattingOnNamedStyleToggleOff": true,
+    "standardizeHighlightException": "magenta",
+    "standardizeShadingException": "FF00FF",
+    "forReferenceUseGray50": false,
+    "createReferenceIncludeHeading": true,
+    "createReferenceDelimiter": "<<",
+    "createReferenceIncludeCite": true,
+    "createReferenceCustomHeading": "",
+    "createReferenceHeadingBold": false,
+    "createReferenceHeadingItalic": false,
+    "createReferenceHeadingEmphasized": false,
+    "createReferenceHeadingUnderlined": false,
+    "createReferenceShrinks": true,
+    "createReferenceShrinkPt": 3,
+    "createReferenceHighlightMode": "shading",
+    "shrinkRestoresOmissionsToNormal": false,
+    "condenseWarningDelimiter": "custom",
+    "condenseWarningCustomPauseMarker": "<<Text Condensed, None Omitted>>",
+    "condenseWarningCustomResumeMarker": "<<Paragraph Breaks Resume>>",
+    "shrinkCustomProtections": [
+      {
+        "pattern": "<<.*Omitted>>",
+        "isRegex": true
+      }
+    ],
+    "acronymPatterns": [
+      {
+        "phrase": "nuclear weapons",
+        "chars": [
+          0,
+          1,
+          2,
+          14
+        ]
+      },
+      {
+        "phrase": "nuclear forces",
+        "chars": [
+          0,
+          1,
+          2,
+          13
+        ]
+      },
+      {
+        "phrase": "economy",
+        "chars": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "phrase": "communications",
+        "chars": [
+          0,
+          1,
+          2,
+          3,
+          13
+        ]
+      },
+      {
+        "phrase": "nuclear warheads",
+        "chars": [
+          0,
+          1,
+          2,
+          15
+        ]
+      },
+      {
+        "phrase": "existential",
+        "chars": [
+          1
+        ]
+      },
+      {
+        "phrase": "extinction",
+        "chars": [
+          1
+        ]
+      },
+      {
+        "phrase": "utilitarianism",
+        "chars": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "phrase": "submarines",
+        "chars": [
+          0,
+          1,
+          2,
+          9
+        ]
+      },
+      {
+        "phrase": "technology",
+        "chars": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "phrase": "technologies",
+        "chars": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "phrase": "intercontinental ballistic missile",
+        "chars": [
+          0,
+          5,
+          17,
+          27
+        ]
+      },
+      {
+        "phrase": "intercontinental ballistic missiles",
+        "chars": [
+          0,
+          5,
+          17,
+          27,
+          34
+        ]
+      },
+      {
+        "phrase": "miscalculation",
+        "chars": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "phrase": "cooperation",
+        "chars": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "phrase": "regulations",
+        "chars": [
+          0,
+          1,
+          2,
+          10
+        ]
+      },
+      {
+        "phrase": "tactical nuclear weapons",
+        "chars": [
+          0,
+          9,
+          17,
+          23
+        ]
+      },
+      {
+        "phrase": "executives",
+        "chars": [
+          0,
+          1,
+          2,
+          3,
+          9
+        ]
+      },
+      {
+        "phrase": "executive",
+        "chars": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "phrase": "Democrat",
+        "chars": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "phrase": "Democrats",
+        "chars": [
+          0,
+          1,
+          2,
+          8
+        ]
+      },
+      {
+        "phrase": "federal",
+        "chars": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "phrase": "proliferation",
+        "chars": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "phrase": "multilateral",
+        "chars": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "phrase": "foreign policy",
+        "chars": [
+          0,
+          1,
+          8,
+          9
+        ]
+      },
+      {
+        "phrase": "government",
+        "chars": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "phrase": "skeptical",
+        "chars": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "phrase": "skeptic",
+        "chars": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "phrase": "skepticism",
+        "chars": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ],
+    "ribbonKeyOverrides": {
+      "setAnalytic": [
+        "Shift-F7",
+        "Mod-Shift-a"
+      ],
+      "setUndertag": [
+        "Shift-F8",
+        "Mod-Shift-u"
+      ],
+      "condenseNoIntegrity": "Mod-F3",
+      "condenseNoIntegrityWithPilcrows": [],
+      "standardizeHighlight": "Mod-Shift-h",
+      "shrink": "Shift-F3",
+      "toggleCase": "Mod-Shift-c",
+      "uncondense": [],
+      "highlightToShading": "Shift-F11",
+      "shadingToHighlight": "Alt-Shift-F11",
+      "openSettings": "Mod-,",
+      "repairText": [],
+      "toggleReadMode": "Mod-Shift-r",
+      "selectSimilar": "Mod-F2",
+      "removeHyperlinks": "Shift-F12",
+      "saveSendDoc": "Mod-Shift-s",
+      "saveAs": [],
+      "openQuickCardSearch": "Mod-p",
+      "toggleSlotExpand": [],
+      "emphasizeAcronym": "Mod-F10",
+      "applyShading": [],
+      "highlightAcronym": "Mod-F11",
+      "underlineAcronym": "Mod-F9",
+      "saveMarkedCards": "Mod-Shift-m",
+      "addCommentToSelection": "Mod-Alt-Dead",
+      "toggleNavPane": "Mod-\\",
+      "newDocument": "Mod-n",
+      "toggleCommentsVisible": "Mod-Shift-\\",
+      "insertReceivedAtCursor": [],
+      "wordCountSelection": "Mod-Shift-w",
+      "addNoteToSelection": [],
+      "newSpeechDocument": "Mod-Shift-n"
+    },
+    "ribbonCustomButtons": [],
+    "keyboardMacros": [],
+    "commentAuthor": "Shreeram Modi",
+    "commentAuthorInitials": "",
+    "commentsVisible": false,
+    "aiModelOverride": "",
+    "aiFeaturesEnabled": true,
+    "clodEnabled": false,
+    "clodActivitiesByTime": {
+      "morning": [],
+      "day": [],
+      "evening": [],
+      "night": []
+    },
+    "clodTimePeriods": {
+      "morning": {
+        "start": 5,
+        "end": 9
+      },
+      "day": {
+        "start": 9,
+        "end": 20
+      },
+      "evening": {
+        "start": 20,
+        "end": 23
+      },
+      "night": {
+        "start": 23,
+        "end": 5
+      }
+    },
+    "aiPersonaName": "Clod",
+    "aiPersonaPronouns": "he",
+    "aiPersonaCustomPronouns": {
+      "subject": "they",
+      "object": "them",
+      "possessive": "their",
+      "reflexive": "themself"
+    },
+    "aiCitePrompt": "Today's date is {DATE}.\n\nYou are an expert in formatting academic citations. Your task is to create a citation for debate given informatoin the user provides you.\n\nYou should format it exactly as per the formatting guide below; do not deviate from this style.\n\nResearch qualifications for authors as necessary. Emphasize very succinct qualifications, including only portions relevant to supporting their credibility to write on the topic of the article, and excluding extraneous qualifications. Shorten the verbiage of qualifications when possible. Ensure that qualifications are readable at a glance, debaters will need to quickly scan them and find key quals during a time-pressured environment.\n\nOnly evidence that has been published within a month of today's date should be formatted using the time sensitive citation style.\n\nOnly output the formatted citation. No \"Tag\" prefix, no extraneous comments, just the citation.\n\nThe general structure is:\n\nLast Name YY — First Name Last Name. Month Day. Qualifications. Publication, “Title,” URL\n\n\n\nHere’s an example:\n\nTAG.\n\nModi 25 — Shreeram Modi. April 28. Undergraduate student at NYU. The Epic, “Lynbrook LD Achieves Success, Led by Coach Nilesh,” https://lhsepic.com/lynbrook-ld-nilesh\n\n\n\nHere’s a real-world example from the treaties topic:\n\nTrump is unique. He’s driving nuclear war through proliferation and the erosion of the LIO.\n\nHirsh 25 — Michael Hirsh. April 11. Former foreign editor and chief diplomatic correspondent for Newsweek, and the former national editor for Politico Magazine. Politico, “Trump May Be Triggering the Fastest Nuclear Weapons Race Since the Cold War,” https://www.politico.com/news/magazine/2025/04/11/trump-says-he-fears-nuclear-weapons-so-why-is-he-making-them-more-popular-00278790\n\nAn additional author makes two changes to the template: \n\n(1) A second name. You only need the first last name on the outside citation, but the cite should include both authors full names.\n\n(2) An additional section for the second author’s qualifications. This is separated by a period.\n\n\n\nFor example:\n\nModi 25 — Shreeram Modi and Om Modi. April 28. Undergraduate student at NYU. Undergraduate student at UC Berkeley. The Epic, “Lynbrook LD Achieves Success, Led by Coach Nilesh,” April 28, 2025. https://lhsepic.com/lynbrook-ld-nilesh\n\n\nHere’s a real-world example:\n\nKeith 25 — Douglas Keith and Yasmin Abusaif. February 14. Senior counsel in the Brennan Center’s Judiciary Program, JD from NYU School of Law. Counsel in the Brennan Center’s Elections and Government Program, JD from UCLA School of Law. Brennan Center for Justice, “What Courts Can Do If the Trump Administration Defies Court Orders,” https://www.brennancenter.org/our-work/research-reports/what-courts-can-do-if-trump-administration-defies-court-orders\n\n\n\nMultiple (three or more) authors are very similar to the format for two authors. You simply repeat the process and add as many names and qualification segments as needed. \n\n\n\nFor example:\n\nModi 25 — Shreeram Modi, Om Modi, and Ilan Boguslavsky. April 28. Undergraduate student at NYU. Undergraduate student at UC Berkeley. Undergraduate student at UC Berkeley. The Epic, “Lynbrook LD Achieves Success, Led by Coach Nilesh,” https://lhsepic.com/lynbrook-ld-nilesh\n\nHere’s a real-world example:\n\nSchmitz 23 — Oswald J. Schmitz, Magnus Sylvén, and Trisha B. Atwood. 2023. Professor of Population and Community Ecology in the Yale School of the Environment, studying biodiversity and ecosystem services, PhD from the University of Michigan. PhD in Animal Ecology from Lund University, Director of the Global Rewilding Alliance. Associate Professor of Ecology at Utah State University, PhD in Ecology from the University of British Columbia. Nature Climate Change, “Trophic Rewilding Can Expand Natural Climate Solutions,” vol. 13\n\nTime sensitive citations are formatted the exact same way, except with the month and day included in the prefix instead of the year, and the year in the body of the citation. The month and day should be separated by a hyphen. You should generally limit the use of time sensitive citations to evidence produced within the previous two months.\n\nExample:\n\nModi 5-9 — Shreeram Modi. 2025. Undergraduate student at NYU. The Epic, “Apple Cash Stimulus Set to Pass,” https://lhsepic.com/apple-cash/\n\n\nHere’s a real-world example:e\n\nRubin 1-7 — Richard Rubin. 2025. US tax policy reporter for The Wall Street Journal. WSJ, “Debt-Ceiling Fight Has New X Factor: Trump,” https://www.wsj.com/politics/policy/us-congress-debt-limit-trump-2c45575d\n\n\nJournal citations follow the same guidelines as the above. However, there are a few changes: \n\n1. Include URLs, ensuring to sanitize them. The URLs you include should be authoritative; most commonly this is a DOI. \n2. If you cannot find an authoritative URL, the URL should be replaced with the volume or page number. If neither is accessible, the journal issue/number can be used instead.\n3. The abbreviation for those three is as follows: \n\nVolume is “vol.” \n\nNumber 3 is “no. 3” \n\nPages 65-67 is “p. 65-67”\n\nHere are examples for each.\n\nHaynes 25 — Abby Haynes, Catherine Sherrington, et. al. 2025. Research Fellow at the Institute for Musculoskeletal Health, University of Sydney, Ph.D. Professor, Sydney School of Public Health, University of Sydney, Deputy Director of the Institute for Musculoskeletal Health. The International Journal of Sport and Society, “Increasing Meaningful Participation of Children with Disability in Little Athletics: Development of a More Inclusive Competition Structure,” https://doi.org/10.18848/2152-7857/CGP/v16i02/75-102\n\nvan Hiel 24 — Alain van Hiel, et. al. 2024. Professor of Psychology at Ghent University (Belgium). Professor of Social Sciences and Psychology at Utrecht University (Netherlands). Review of Social Psychology, “Procedural Fairness in Ethnic-Cultural Decision-Making: Benefits, Processes and Minority and Majority Group Perspectives.” vol 35\n\nEichensehr 21 — Kristen E. Eichensehr. March. Professor of Law at the University of Virginia School of Law, Visiting Professor of Law at Harvard Law School, member of the U.S. State Department’s Advisory Committee on International Law. Duke Law Journal, “The Youngstown Canon: Vetoed Bills and the Separation of Powers.” vol. 70\n\nBooks are similar to journals and comply with all previous principles. However, there are a few things to note: \n\n(1) The ‘publication’ is equivalent to the book’s title. Failing that, the publisher (e.g., Oxford Press) may be used. \n\n(2) The ‘article title’ is equivalent to the chapter that you are cutting. \n\n(3) The URL should be replaced with either the chapter number or the page numbers. \n\nChapter 4 is “Ch. 4”\n\nPages 65-67 is “p. 65-67”\n\n\n\nHere’s a real-world example:\n\nKoh 24 — Harold Hongju Koh. 2024. Sterling Professor of International Law, Yale Law School, Legal Adviser to the U.S. Department of State, Assistant Secretary of State for Democracy, Human Rights, and Labor. Yale University Press, “The National Security Constitution in the Twenty-First Century”\n\n\n\nHere’s an example that lists the chapter:\n\nFitzpatrick 16 — Mark Fitzpatrick. February 3. Associate Fellow and former Executive Director of the International Institute for Strategic Studies, former Deputy Assistant Secretary for Non-Proliferation at the Department of State, M.A. in Public Policy from Harvard University. Asia’s Latent Nuclear Powers, “Taiwan,” Ch. 3\n\n\nHere is an example that lists the page numbers:\n\nCribb 17 — Julian Cribb. 2017. Principal of Julian Cribb & Associates, Fellow of the Australian Academy of Technological Sciences and Engineering, former Director of National Awareness at the Commonwealth Scientific and Industrial Research Organisation. Surviving the 21st Century, “The Baker,” p. 91-93\n\nCourt cases modify the template the most. When citing a judge’s opinion, the judge’s name should be the author to whom the card is attributed. This is no different than how the CMOS handles interviews: “interviews are usually cited under the name of the interviewee rather than the interviewer.” This is also the most useful for debate rounds, as just saying “the Court” gives you little to no information about who said the words in the card.\n\n(1) The ‘article title’ is equivalent to the court case that you’re citing.\n\n(2) The ‘publication’ is the actual court the case is being tried in.\n\n(3) The URL should be replaced with the court reporter information.\n\n\n\nHere are a few examples:\n\nHarlan 56 — John Marshall Harlan. 1956. Associate Justice of the SCOTUS. Supreme Court of the United States, “De Sylva v. Ballentine,” 351 U.S. 570\n\nLyons 99 — Champ Lyons. 1999. Justice of the Supreme Court of Alabama, BA from Harvard, JD from Alabama School of Law. Supreme Court of Alabama, “Ex parte A-O Mach. Co.,” 749 So. 2d 1268\n\nBlack 52 — Hugo Black. 1952. US Senator, Associate Justice of the SCOTUS. Supreme Court of the United States, “Youngstown Sheet & Tube Co. v. Sawyer,” 343 U.S. 579\n\n\nImportant:\n- Do not remove any information from the citation that was included in the submission.\n- Do not add any information to the citation that was not included in the submission.\n- If the title or publication or names or qualifications are in another language, translate them to English.\n\nRespond using the delimited block format below — no JSON, no quoting, no escaping. Quotes inside the cite (around the title, for instance) just appear literally; the parser splits on the markers, not the punctuation.\n\n[[CITE]]\n<the full reformatted citation, exactly as you'd otherwise have returned it>\n[[TOKENS]]\n<one token per line>\n[[END]]\n\nThe TOKENS section lists every substring that should be highlighted with the F8 cite mark. The highlighted portion is the LASTNAME(s) + SHORTDATE of the leading author block; firstnames stay unmarked.\n\nTownsend 25 — Michael Townsend: TOKENS = \"Townsend 25\"",
+    "translationProvider": "auto",
+    "translationTargetLang": "en",
+    "translationSourceLang": "auto",
+    "prependTranslationMarker": true,
+    "multiDocWorkspace": false,
+    "mobileLayout": "auto",
+    "multiDocLayoutMode": "compact",
+    "quickCardActiveTags": [],
+    "cardCutterEnabled": false,
+    "cardCutterEnginePath": "",
+    "cardCutterEmphasisStyle": "voice",
+    "cardCutterReadTimeSec": 12,
+    "cardCutterAcronymSplitting": "off",
+    "cardCutterMorphologyShaving": false,
+    "cardCutterClarifyingQuestions": "when-ambiguous",
+    "pairingEnabled": true,
+    "pairingConnectedUntil": 0,
+    "pairingRelayUrl": "",
+    "pairingRelayToken": "",
+    "pairingPollSeconds": 30,
+    "pairingOwnCode": "cmk1.IrcgUmG5ws_r-mhlDGY-4091h7d7mjG-orl5JqoaZD0",
+    "pairingDisplayName": "smodi",
+    "collabShowCursors": true,
+    "pairingPartners": [],
+    "pairingGroups": [],
+    "pairingBlockedCodes": [],
+    "pairingStarred": null,
+    "pairingReceiveFlash": "once",
+    "cleanProtectedStyles": []
+  }
+}
