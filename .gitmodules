@@ -1,6 +1,6 @@
 [submodule "mail"]
 	path = mail
 	url = git@github.com:shrimpram/dotfiles-mail.git
-[submodule "dotfiles-tmuxp"]
+[submodule "tmuxp"]
 	path = tmuxp
 	url = git@github.com:shreerammodi/dotfiles-tmuxp.git
