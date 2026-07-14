@@ -27,6 +27,8 @@ macos-window-shadow = false
 
 confirm-close-surface = false
 
+copy-on-select = false
+
 # Config syntax crash course
 # ==========================
 # # The config file consists of simple key-value pairs,
