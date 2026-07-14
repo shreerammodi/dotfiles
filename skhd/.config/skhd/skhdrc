@@ -1,0 +1,73 @@
+# skhd - modal keyboard layer for rift.
+# default mode: only hyper+space is grabbed, everything else passes through.
+# rift mode ('@' = capture, unbound keys are swallowed): plain keys drive
+# windows via rift-cli. Border color signals the active mode.
+
+:: default : borders active_color=0xffc6daff
+:: rift @ : borders active_color=0xffff9e64
+
+hyper - space ; rift
+rift < hyper - space ; default
+rift < escape ; default
+
+# focus
+rift < h : rift-cli execute window focus left
+rift < j : rift-cli execute window focus down
+rift < k : rift-cli execute window focus up
+rift < l : rift-cli execute window focus right
+
+# move window
+rift < shift - h : rift-cli execute layout move-node left
+rift < shift - j : rift-cli execute layout move-node down
+rift < shift - k : rift-cli execute layout move-node up
+rift < shift - l : rift-cli execute layout move-node right
+
+# workspaces (rift is 0-indexed)
+rift < 1 : rift-cli execute workspace switch 0
+rift < 2 : rift-cli execute workspace switch 1
+rift < 3 : rift-cli execute workspace switch 2
+rift < 4 : rift-cli execute workspace switch 3
+rift < 5 : rift-cli execute workspace switch 4
+rift < 6 : rift-cli execute workspace switch 5
+rift < 7 : rift-cli execute workspace switch 6
+rift < 8 : rift-cli execute workspace switch 7
+rift < 9 : rift-cli execute workspace switch 8
+
+rift < shift - 1 : rift-cli execute workspace move-window 0
+rift < shift - 2 : rift-cli execute workspace move-window 1
+rift < shift - 3 : rift-cli execute workspace move-window 2
+rift < shift - 4 : rift-cli execute workspace move-window 3
+rift < shift - 5 : rift-cli execute workspace move-window 4
+rift < shift - 6 : rift-cli execute workspace move-window 5
+rift < shift - 7 : rift-cli execute workspace move-window 6
+rift < shift - 8 : rift-cli execute workspace move-window 7
+rift < shift - 9 : rift-cli execute workspace move-window 8
+
+rift < i : rift-cli execute workspace next
+rift < o : rift-cli execute workspace prev
+
+# move-window needs a target index, so compute the neighbor (wraps around count)
+rift < shift - i : j=$(rift-cli query workspaces); i=$(echo "$j" | jq -r '.[]|select(.is_active).index'); n=$(echo "$j" | jq length); rift-cli execute workspace move-window $(( (i+1) % n ))
+rift < shift - o : j=$(rift-cli query workspaces); i=$(echo "$j" | jq -r '.[]|select(.is_active).index'); n=$(echo "$j" | jq length); rift-cli execute workspace move-window $(( (i-1+n) % n ))
+
+# layout
+rift < r : rift-cli execute layout toggle-orientation
+rift < s : rift-cli execute layout toggle-stack
+rift < f : rift-cli execute window toggle-fullscreen-within-gaps
+rift < shift - f : rift-cli execute window toggle-float
+
+rift < m : rift-cli execute mission-control show-all
+
+# rift has no minimize; '->' forwards Cmd-M to the app so it minimizes natively.
+rift < cmd - m -> : true
+
+# resize (keycodes: 0x1B = minus, 0x18 = equal)
+rift < 0x1B : rift-cli execute window resize-shrink
+rift < 0x18 : rift-cli execute window resize-grow
+
+# displays
+# ponytail: right-else-left covers a 2-display setup; rift has no "focus next display"
+rift < d : rift-cli execute display focus --direction right || rift-cli execute display focus --direction left
+
+# launchers
+rift < t : open -a Ghostty
