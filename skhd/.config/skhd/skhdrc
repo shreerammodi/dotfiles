@@ -1,73 +1,72 @@
-# skhd - modal keyboard layer for rift.
-# default mode: only hyper+space is grabbed, everything else passes through.
-# rift mode ('@' = capture, unbound keys are swallowed): plain keys drive
-# windows via rift-cli. Border color signals the active mode.
+# skhd -> yabai. Mirrors the aerospace config: Alt is the modifier, no modes.
+# Letters are resolved through the active keyboard layout (Colemak), so they
+# match the aerospace bindings. Punctuation uses keycodes (physical); on Colemak
+# semicolon sits on a different physical key - adjust if it feels wrong.
 
-:: default : borders active_color=0xffc6daff
-:: rift @ : borders active_color=0xffff9e64
+# --- launchers (aerospace alt-t / alt-semicolon) ---
+alt - t    : open -a Ghostty
 
-hyper - space ; rift
-rift < hyper - space ; default
-rift < escape ; default
+# --- layout (alt-r rotate, alt-s toggle stack, alt-f fullscreen) ---
+alt - r : yabai -m space --rotate 90
+alt - s : yabai -m space --layout "$(yabai -m query --spaces --space | jq -r 'if .type == "stack" then "bsp" else "stack" end')"
+alt - f : yabai -m window --toggle zoom-fullscreen
 
-# focus
-rift < h : rift-cli execute window focus left
-rift < j : rift-cli execute window focus down
-rift < k : rift-cli execute window focus up
-rift < l : rift-cli execute window focus right
+# --- split (aerospace alt-z horizontal / alt-v vertical) ---
+alt - z : yabai -m window --insert east
+alt - v : yabai -m window --insert south
 
-# move window
-rift < shift - h : rift-cli execute layout move-node left
-rift < shift - j : rift-cli execute layout move-node down
-rift < shift - k : rift-cli execute layout move-node up
-rift < shift - l : rift-cli execute layout move-node right
+# --- focus (alt-hjkl); in a stack cycle the stack, else cross to the display at the edge ---
+alt - h : yabai -m window --focus west  || yabai -m display --focus west
+alt - j : yabai -m window --focus south || yabai -m window --focus stack.next || yabai -m window --focus stack.first
+alt - k : yabai -m window --focus north || yabai -m window --focus stack.prev || yabai -m window --focus stack.last
+alt - l : yabai -m window --focus east  || yabai -m display --focus east
 
-# workspaces (rift is 0-indexed)
-rift < 1 : rift-cli execute workspace switch 0
-rift < 2 : rift-cli execute workspace switch 1
-rift < 3 : rift-cli execute workspace switch 2
-rift < 4 : rift-cli execute workspace switch 3
-rift < 5 : rift-cli execute workspace switch 4
-rift < 6 : rift-cli execute workspace switch 5
-rift < 7 : rift-cli execute workspace switch 6
-rift < 8 : rift-cli execute workspace switch 7
-rift < 9 : rift-cli execute workspace switch 8
+# --- move / warp window (alt-shift-hjkl) ---
+shift + alt - h : yabai -m window --swap west  || yabai -m window --display west  --focus
+shift + alt - j : yabai -m window --swap south
+shift + alt - k : yabai -m window --swap north
+shift + alt - l : yabai -m window --swap east  || yabai -m window --display east  --focus
 
-rift < shift - 1 : rift-cli execute workspace move-window 0
-rift < shift - 2 : rift-cli execute workspace move-window 1
-rift < shift - 3 : rift-cli execute workspace move-window 2
-rift < shift - 4 : rift-cli execute workspace move-window 3
-rift < shift - 5 : rift-cli execute workspace move-window 4
-rift < shift - 6 : rift-cli execute workspace move-window 5
-rift < shift - 7 : rift-cli execute workspace move-window 6
-rift < shift - 8 : rift-cli execute workspace move-window 7
-rift < shift - 9 : rift-cli execute workspace move-window 8
+# --- resize (aerospace alt-minus / alt-equal, smart-ish via bottom-right corner) ---
+alt - 0x1B : yabai -m window --resize bottom_right:-60:-60
+alt - 0x18 : yabai -m window --resize bottom_right:60:60
 
-rift < i : rift-cli execute workspace next
-rift < o : rift-cli execute workspace prev
+# --- displays (aerospace alt-d split into p/n; 1-indexed by arrangement) ---
+alt - p : yabai -m display --focus 1
+alt - n : yabai -m display --focus 2
 
-# move-window needs a target index, so compute the neighbor (wraps around count)
-rift < shift - i : j=$(rift-cli query workspaces); i=$(echo "$j" | jq -r '.[]|select(.is_active).index'); n=$(echo "$j" | jq length); rift-cli execute workspace move-window $(( (i+1) % n ))
-rift < shift - o : j=$(rift-cli query workspaces); i=$(echo "$j" | jq -r '.[]|select(.is_active).index'); n=$(echo "$j" | jq length); rift-cli execute workspace move-window $(( (i-1+n) % n ))
+shift + alt - p : yabai -m window --display 1 --focus
+shift + alt - n : yabai -m window --display 2 --focus
 
-# layout
-rift < r : rift-cli execute layout toggle-orientation
-rift < s : rift-cli execute layout toggle-stack
-rift < f : rift-cli execute window toggle-fullscreen-within-gaps
-rift < shift - f : rift-cli execute window toggle-float
+# --- workspaces: next/prev with wrap (aerospace alt-i / alt-o) ---
+alt - i : yabai -m space --focus next || yabai -m space --focus first
+alt - o : yabai -m space --focus prev || yabai -m space --focus last
 
-rift < m : rift-cli execute mission-control show-all
+# move window to next/prev space with wrap (aerospace alt-shift-i / alt-shift-o)
+shift + alt - i : yabai -m window --space next || yabai -m window --space first
+shift + alt - o : yabai -m window --space prev || yabai -m window --space last
 
-# rift has no minimize; '->' forwards Cmd-M to the app so it minimizes natively.
-rift < cmd - m -> : true
+# --- mission control: native macOS (crisp real Spaces) ---
+alt - m : open -a "Mission Control"
 
-# resize (keycodes: 0x1B = minus, 0x18 = equal)
-rift < 0x1B : rift-cli execute window resize-shrink
-rift < 0x18 : rift-cli execute window resize-grow
+# --- switch to workspace (alt-1..9) ---
+alt - 1 : yabai -m space --focus 1
+alt - 2 : yabai -m space --focus 2
+alt - 3 : yabai -m space --focus 3
+alt - 4 : yabai -m space --focus 4
+alt - 5 : yabai -m space --focus 5
+alt - 6 : yabai -m space --focus 6
+alt - 7 : yabai -m space --focus 7
+alt - 8 : yabai -m space --focus 8
+alt - 9 : yabai -m space --focus 9
 
-# displays
-# ponytail: right-else-left covers a 2-display setup; rift has no "focus next display"
-rift < d : rift-cli execute display focus --direction right || rift-cli execute display focus --direction left
-
-# launchers
-rift < t : open -a Ghostty
+# --- move window to workspace (alt-shift-1..9) ---
+shift + alt - 1 : yabai -m window --space 1
+shift + alt - 2 : yabai -m window --space 2
+shift + alt - 3 : yabai -m window --space 3
+shift + alt - 4 : yabai -m window --space 4
+shift + alt - 5 : yabai -m window --space 5
+shift + alt - 6 : yabai -m window --space 6
+shift + alt - 7 : yabai -m window --space 7
+shift + alt - 8 : yabai -m window --space 8
+shift + alt - 9 : yabai -m window --space 9
