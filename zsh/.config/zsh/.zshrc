@@ -8,6 +8,7 @@ alias ls="eza"
 alias ll="eza --long --header --git --icons --classify --all"
 alias lg="lazygit"
 alias sp="sesh picker"
+alias st="sesh picker --tmux"
 
 setopt globdots
 setopt autocd
