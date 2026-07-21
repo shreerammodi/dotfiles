@@ -1,6 +1,7 @@
-# modes: default plus a captured resize mode (alt-w). 'default' must be first.
+# modes: default plus captured resize (alt-w) and stack (alt-c) modes. 'default' must be first.
 :: default
 :: resize @
+:: stack @
 
 alt - t : open -a Ghostty
 
@@ -10,6 +11,7 @@ alt - f : yabai -m window --toggle zoom-fullscreen
 
 alt - z : yabai -m window --insert east
 alt - v : yabai -m window --insert south
+alt - x : yabai -m window --insert stack
 
 alt - h : yabai -m window --focus west  || yabai -m display --focus west
 alt - j : yabai -m window --focus south || yabai -m window --focus stack.next || yabai -m window --focus stack.first
@@ -22,6 +24,7 @@ shift + alt - k : yabai -m window --warp north
 shift + alt - l : yabai -m window --warp east  || yabai -m window --display east  --focus
 
 alt - w ; resize
+alt - c ; stack
 
 resize < h : yabai -m window --resize right:-60:0  || yabai -m window --resize left:-60:0
 resize < j : yabai -m window --resize bottom:0:60  || yabai -m window --resize top:0:60
@@ -30,6 +33,22 @@ resize < l : yabai -m window --resize right:60:0   || yabai -m window --resize l
 
 resize < escape ; default
 resize < alt - w ; default
+
+# stack mode: pull the neighbouring window in <dir> onto the focused window,
+# merging them into a stack that occupies the focused window's frame.
+stack < h : yabai -m window --stack west
+stack < j : yabai -m window --stack south
+stack < k : yabai -m window --stack north
+stack < l : yabai -m window --stack east
+
+# cycle within the stack, and unstack the focused window (float/unfloat is the
+# only reliable way out: stack members share a frame, so --warp is a no-op).
+stack < n : yabai -m window --focus stack.next || yabai -m window --focus stack.first
+stack < p : yabai -m window --focus stack.prev || yabai -m window --focus stack.last
+stack < u : yabai -m window --toggle float && yabai -m window --toggle float
+
+stack < escape ; default
+stack < alt - c ; default
 
 alt - p : yabai -m display --focus 1
 alt - n : yabai -m display --focus 2
