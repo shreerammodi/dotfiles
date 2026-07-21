@@ -5,14 +5,17 @@ sudo yabai --load-sa
 
 yabai -m config layout bsp
 
+# drop shadows overlap the border edge; kill them so borders render clean
+yabai -m config window_shadow off
+
 yabai -m config mouse_modifier ctrl
 yabai -m config mouse_drop_action stack
 
-yabai -m config top_padding    5
-yabai -m config bottom_padding 5
-yabai -m config left_padding   5
-yabai -m config right_padding  5
-yabai -m config window_gap     5
+yabai -m config top_padding    2
+yabai -m config bottom_padding 2
+yabai -m config left_padding   2
+yabai -m config right_padding  2
+yabai -m config window_gap     2
 
 # split behaviour: let yabai pick the axis by aspect ratio (i3-like feel)
 yabai -m config split_type auto
@@ -21,13 +24,11 @@ yabai -m config split_type auto
 yabai -m config mouse_follows_focus on
 yabai -m config focus_follows_mouse off
 
-# --- rules (aerospace app_rule: keepassxc floats) ---
 yabai -m rule --add app="^KeePassXC$" manage=off
 
 # rules only fire on new windows; apply to what is already open
 yabai -m rule --apply
 
-# --- borders (aerospace after-startup-command) ---
-borders active_color=0xffc6daff inactive_color=0xff646464 width=5.0 2>/dev/null &
+borders active_color=0xffc6daff inactive_color=0xff646464 width=2.0 2>/dev/null &
 
 echo "yabai configuration loaded"
