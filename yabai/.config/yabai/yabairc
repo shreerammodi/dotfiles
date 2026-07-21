@@ -24,6 +24,9 @@ yabai -m config focus_follows_mouse off
 # --- rules (aerospace app_rule: keepassxc floats) ---
 yabai -m rule --add app="^KeePassXC$" manage=off
 
+# rules only fire on new windows; apply to what is already open
+yabai -m rule --apply
+
 # --- borders (aerospace after-startup-command) ---
 borders active_color=0xffc6daff inactive_color=0xff646464 width=5.0 2>/dev/null &
 
