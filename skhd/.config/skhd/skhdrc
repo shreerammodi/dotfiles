@@ -3,7 +3,7 @@
 :: resize @
 :: stack @
 
-alt - t : open -a Ghostty
+alt - t : osascript -e 'tell application "Ghostty" to new window'
 
 alt - r : yabai -m space --rotate 90
 alt - s : yabai -m space --layout "$(yabai -m query --spaces --space | jq -r 'if .type == "stack" then "bsp" else "stack" end')"
@@ -50,11 +50,11 @@ stack < u : yabai -m window --toggle float && yabai -m window --toggle float
 stack < escape ; default
 stack < alt - c ; default
 
-alt - p : yabai -m display --focus 1
-alt - n : yabai -m display --focus 2
+alt - p : yabai -m display --focus 2
+alt - n : yabai -m display --focus 1
 
-shift + alt - p : yabai -m window --display 1 --focus
-shift + alt - n : yabai -m window --display 2 --focus
+shift + alt - p : yabai -m window --display 2 --focus
+shift + alt - n : yabai -m window --display 1 --focus
 
 alt - i : yabai -m space --focus next
 alt - o : yabai -m space --focus prev
