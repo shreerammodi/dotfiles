@@ -13,9 +13,19 @@ map("n", "<leader>co", vim.cmd.copen, { desc = "Open quickfixlist" })
 map("n", "<leader>cn", vim.cmd.cnext, { desc = "Go to next error" })
 map("n", "<leader>cp", vim.cmd.cprev, { desc = "Go to prev error" })
 
-map("i", "<C-l>", "<C-G>u<Esc>[s1z=`]a<C-G>u", { desc = "Correct spelling error" })
+map(
+    "i",
+    "<C-l>",
+    "<C-G>u<Esc>[s1z=`]a<C-G>u",
+    { desc = "Correct spelling error" }
+)
 
 map({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank into clipboard" })
-map("n", "<leader>Y", [[<cmd>%y +<cr>]], { desc = "Yank buffer into clipboard" })
+map(
+    "n",
+    "<leader>Y",
+    [[<cmd>%y +<cr>]],
+    { desc = "Yank buffer into clipboard" }
+)
 
 map({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete into _" })
