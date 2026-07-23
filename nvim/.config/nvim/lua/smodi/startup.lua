@@ -49,6 +49,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.filetype.add({
     extension = {
         gs = "javascript",
+        mdx = "markdown",
         ron = "rust"
     }
 })
