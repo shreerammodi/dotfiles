@@ -1,13 +1,16 @@
 #!/usr/bin/env -S uv run --script
 # /// script
 # requires-python = ">=3.10"
-# dependencies = ["mlx-vlm"]
+# dependencies = ["mlx-vlm; sys_platform == 'darwin' and platform_machine == 'arm64'"]
 # ///
-"""ocr-pdf - OCR a scanned PDF (or page images) into paragraphs on Apple Silicon.
+"""ocr-pdf - OCR a scanned PDF (or page images) into paragraphs.
 
-Model: baidu/Unlimited-OCR (MIT; DeepSeek-OCR lineage, 3.3B). Baidu's own runners need CUDA,
-so this runs the MLX int8 port. The first run downloads about 3.9 GB into ~/.cache/huggingface;
-OCR_MODEL overrides the model (a hub id or a local directory). Needs uv and poppler (pdftoppm).
+On Apple Silicon: baidu/Unlimited-OCR (MIT; DeepSeek-OCR lineage, 3.3B), the MLX int8 port. The
+first run downloads about 3.9 GB into ~/.cache/huggingface; OCR_MODEL overrides the model (a hub
+id or a local directory). Anywhere else (Linux, cloud sessions, Intel Macs) it falls back to
+tesseract: the model on CPU took over 20 minutes a page. OCR_ENGINE=tesseract forces the fallback.
+On 8 simulated scan pages, long sentences read verbatim: Unlimited-OCR 83.6%, tesseract 70.7-78.6%.
+Needs uv and poppler (pdftoppm); the fallback also needs tesseract.
 
     ocr-pdf in.pdf out.txt
     ocr-pdf p1.png p2.png out.txt
@@ -15,7 +18,7 @@ OCR_MODEL overrides the model (a hub id or a local directory). Needs uv and popp
 The output is a READING of the page, not the page. Check every passage you quote against the
 page image.
 """
-import os, re, subprocess, sys, tempfile
+import os, platform, re, shutil, subprocess, sys, tempfile
 
 MODEL = os.environ.get('OCR_MODEL', 'sahilchachra/unlimited-ocr-8bit-mlx')
 PROMPT = '<image>document parsing.'   # Baidu's prompt, raw: their infer() uses the plain template
@@ -23,7 +26,9 @@ PROMPT = '<image>document parsing.'   # Baidu's prompt, raw: their infer() uses 
 # Only the four-number box shape: a source's own `[3]` citation markers stay.
 BOX = r'\[\d+, \d+, \d+, \d+\]\]?'
 DET = re.compile(rf'(<\|det\|>)?\w+ {BOX}(<\|/det\|>)?|{BOX}<\|/det\|>|<\|/?(det|ref)\|>|\[Non-Text\]')
-DPI = 200
+DPI = 200                 # Unlimited-OCR; tesseract reads at 300
+ENGINE = os.environ.get('OCR_ENGINE') or (
+    'unlimited-ocr' if sys.platform == 'darwin' and platform.machine() == 'arm64' else 'tesseract')
 
 try:
     DICT = set(w.strip().lower() for w in open('/usr/share/dict/words'))
@@ -91,17 +96,35 @@ def paragraphs(text):
     return [p for p in out if len(p.split()) < 8 or not (p in seen or seen.add(p))]
 
 
-def pages(inputs, tmp):
+def pages(inputs, tmp, dpi=DPI):
     for f in inputs:
         if f.lower().endswith('.pdf'):
             d = tempfile.mkdtemp(dir=tmp)
-            subprocess.run(['pdftoppm', '-r', str(DPI), '-png', f, os.path.join(d, 'p')], check=True)
+            subprocess.run(['pdftoppm', '-r', str(dpi), '-png', f, os.path.join(d, 'p')], check=True)
             yield from sorted(os.path.join(d, p) for p in os.listdir(d))
         else:
             yield f
 
 
-def main(inputs, out):
+def unwrap(t):
+    """tesseract keeps the page's line breaks: join lines inside a block, close `inter-` + `national`."""
+    t = re.sub(r'(\w+)-\n(\w+)', lambda m: m[1] + m[2] if (m[1] + m[2]).lower() in DICT else f'{m[1]}-{m[2]}', t)
+    return re.sub(r'(?<!\n)\n(?!\n)', ' ', t)
+
+
+def read_tesseract(inputs):
+    if not shutil.which('tesseract'):
+        sys.exit('ocr-pdf: no tesseract on PATH (brew install tesseract / apt-get install -y tesseract-ocr)')
+    text = []
+    with tempfile.TemporaryDirectory() as tmp:
+        for i, img in enumerate(pages(inputs, tmp, dpi=300), 1):
+            t = subprocess.run(['tesseract', img, '-'], capture_output=True, text=True, check=True).stdout
+            print(f'ocr-pdf: page {i}: {len(t.split())} words', file=sys.stderr)
+            text.append(unwrap(t))
+    return text
+
+
+def read_unlimited(inputs):
     from mlx_vlm import load, generate
     model, processor = load(os.path.expanduser(MODEL))
     text = []
@@ -112,10 +135,16 @@ def main(inputs, out):
             t = DET.sub('', unbpe(getattr(r, 'text', r)))
             print(f'ocr-pdf: page {i}: {len(t.split())} words', file=sys.stderr)
             text.append(t)
+    return text
+
+
+def main(inputs, out):
+    text = read_unlimited(inputs) if ENGINE == 'unlimited-ocr' else read_tesseract(inputs)
     paras = paragraphs('\n'.join(text))
     open(out, 'w', encoding='utf-8').write('\n\n'.join(paras))
     print(f'ocr-pdf: {len(paras)} paragraphs, {sum(len(p.split()) for p in paras)} words '
-          f'via {MODEL} -> {out}\n  OCR text: check every quoted passage against the page image.')
+          f'via {MODEL if ENGINE == "unlimited-ocr" else "tesseract"} -> {out}\n'
+          '  OCR text: check every quoted passage against the page image.')
 
 
 if __name__ == '__main__':
