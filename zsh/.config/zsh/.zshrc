@@ -3,12 +3,14 @@
 [ -f ~/.config/zsh/nnn.zsh ] && source ~/.config/zsh/nnn.zsh
 [ -f ~/.config/zsh/fzf-tab-config.zsh ] && source ~/.config/zsh/fzf-tab-config.zsh
 
+alias anydoc="npx @firecrawl/anydoc"
 alias b="buku --suggest"
 alias ls="eza"
 alias ll="eza --long --header --git --icons --classify --all"
 alias lg="lazygit"
 alias sp="sesh picker"
 alias st="sesh picker --tmux"
+alias gp="greptile"
 
 setopt globdots
 setopt autocd
