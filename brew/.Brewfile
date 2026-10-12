@@ -19,6 +19,7 @@ brew "imagemagick"
 brew "lazygit"
 brew "neovim"
 brew "pandoc"
+brew "poppler"
 brew "ripgrep"
 brew "stow"
 brew "tree"
@@ -43,6 +44,7 @@ brew "luarocks"
 brew "node"
 brew "pipx"
 brew "python@3.13"
+brew "uv"
 # Rust: managed via rustup (https://rustup.rs), not brew
 
 # Finance

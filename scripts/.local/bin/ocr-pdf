@@ -1,0 +1,103 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.10"
+# dependencies = ["mlx-vlm"]
+# ///
+"""ocr-pdf - OCR a scanned PDF (or page images) into paragraphs on Apple Silicon.
+
+Model: baidu/Unlimited-OCR (MIT; DeepSeek-OCR lineage, 3.3B). Baidu's own runners need CUDA,
+so this runs the MLX int8 port. The first run downloads about 3.9 GB into ~/.cache/huggingface;
+OCR_MODEL overrides the model (a hub id or a local directory). Needs uv and poppler (pdftoppm).
+
+    ocr-pdf in.pdf out.txt
+    ocr-pdf p1.png p2.png out.txt
+
+The output is a READING of the page, not the page. Check every passage you quote against the
+page image.
+"""
+import os, re, subprocess, sys, tempfile
+
+MODEL = os.environ.get('OCR_MODEL', 'sahilchachra/unlimited-ocr-8bit-mlx')
+PROMPT = 'Free OCR.'      # plain text; `document parsing.` adds layout markup we strip anyway
+DPI = 200
+
+try:
+    DICT = set(w.strip().lower() for w in open('/usr/share/dict/words'))
+except OSError:
+    DICT = set()
+
+
+def _byte_table():
+    """GPT-2 byte-level BPE symbol -> byte (`Ġ` -> space, `Ċ` -> newline)."""
+    bs = list(range(33, 127)) + list(range(161, 173)) + list(range(174, 256))
+    cs, n = bs[:], 0
+    for b in range(256):
+        if b not in bs:
+            bs.append(b); cs.append(256 + n); n += 1
+    return {chr(c): b for b, c in zip(bs, cs)}
+
+_BYTES = _byte_table()
+
+
+def unbpe(t):
+    """mlx-vlm returns this tokenizer's output still in byte-level BPE symbols; decode it."""
+    if 'Ġ' not in t and 'Ċ' not in t:
+        return t
+    return bytes(_BYTES.get(ch, 63) for ch in t).decode('utf-8', errors='replace')
+
+
+def paragraphs(text):
+    """Model markdown -> paragraphs, syntax stripped, page seams re-joined."""
+    text = re.sub(r'\*\*([^*]*)\*\*|(?<!\*)\*([^*]+)\*(?!\*)', lambda m: m.group(1) or m.group(2), text)
+    text = re.sub(r'^#{1,6}\s*', '', text, flags=re.M)
+    text = re.sub(r'(?s)<[^>]{1,80}>', '', text)
+    out = []
+    for p in (re.sub(r'\s+', ' ', p).strip() for p in text.split('\n')):
+        if len(p) < 2:
+            continue
+        prev = out[-1].rstrip('"\'”’)]') if out else ''
+        first = next((c for c in p if c.isalpha()), '')
+        if prev and prev[-1] not in '.!?:;' and first.islower():   # a sentence split by a page break
+            if prev.endswith('-'):
+                closed = re.sub(r'[^a-z]', '', (prev.split(' ')[-1] + p.split(' ')[0]).lower())
+                out[-1] = (out[-1][:-1] if closed in DICT else out[-1]) + p
+            else:
+                out[-1] += ' ' + p
+            continue
+        out.append(p)
+    return out
+
+
+def pages(inputs, tmp):
+    for f in inputs:
+        if f.lower().endswith('.pdf'):
+            d = tempfile.mkdtemp(dir=tmp)
+            subprocess.run(['pdftoppm', '-r', str(DPI), '-png', f, os.path.join(d, 'p')], check=True)
+            yield from sorted(os.path.join(d, p) for p in os.listdir(d))
+        else:
+            yield f
+
+
+def main(inputs, out):
+    from mlx_vlm import load, generate
+    from mlx_vlm.prompt_utils import apply_chat_template
+    model, processor = load(os.path.expanduser(MODEL))
+    prompt = apply_chat_template(processor, model.config, PROMPT, num_images=1)
+    text = []
+    with tempfile.TemporaryDirectory() as tmp:
+        for i, img in enumerate(pages(inputs, tmp), 1):
+            r = generate(model, processor, prompt, image=[img], max_tokens=8192,
+                         temperature=0.0, repetition_penalty=1.05, verbose=False)
+            t = re.sub(r'<\|det\|>.*?<\|/det\|>|<\|/?ref\|>', '', unbpe(getattr(r, 'text', r)))
+            print(f'ocr-pdf: page {i}: {len(t.split())} words', file=sys.stderr)
+            text.append(t)
+    paras = paragraphs('\n'.join(text))
+    open(out, 'w', encoding='utf-8').write('\n\n'.join(paras))
+    print(f'ocr-pdf: {len(paras)} paragraphs, {sum(len(p.split()) for p in paras)} words '
+          f'via {MODEL} -> {out}\n  OCR text: check every quoted passage against the page image.')
+
+
+if __name__ == '__main__':
+    if len(sys.argv) < 3:
+        sys.exit('usage: ocr-pdf in.pdf [more.pdf|page.png ...] out.txt')
+    main(sys.argv[1:-1], sys.argv[-1])
