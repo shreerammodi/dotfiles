@@ -18,7 +18,11 @@ page image.
 import os, re, subprocess, sys, tempfile
 
 MODEL = os.environ.get('OCR_MODEL', 'sahilchachra/unlimited-ocr-8bit-mlx')
-PROMPT = 'Free OCR.'      # plain text; `document parsing.` adds layout markup we strip anyway
+PROMPT = '<image>document parsing.'   # Baidu's prompt, raw: their infer() uses the plain template
+# Layout boxes (`<|det|>text [x1, y1, x2, y2]<|/det|>`, sometimes missing a tag) and figure placeholders.
+# Only the four-number box shape: a source's own `[3]` citation markers stay.
+BOX = r'\[\d+, \d+, \d+, \d+\]\]?'
+DET = re.compile(rf'(<\|det\|>)?\w+ {BOX}(<\|/det\|>)?|{BOX}<\|/det\|>|<\|/?(det|ref)\|>|\[Non-Text\]')
 DPI = 200
 
 try:
@@ -46,6 +50,24 @@ def unbpe(t):
     return bytes(_BYTES.get(ch, 63) for ch in t).decode('utf-8', errors='replace')
 
 
+def no_repeat(n=35, window=128):
+    """Baidu's no_repeat_ngram_size=35, ngram_window=128: never repeat a 35-token run from the last 128.
+
+    Without it 3 of 16 test pages looped (one phrase 251 times) and took 40 s instead of 4 s.
+    """
+    import mlx.core as mx
+    def proc(tokens, logits):
+        t = tokens[-window:].tolist()
+        if len(t) < n:
+            return logits
+        pre = t[-(n - 1):]
+        ban = [t[i + n - 1] for i in range(len(t) - n + 1) if t[i:i + n - 1] == pre]
+        if ban:
+            logits[..., mx.array(ban)] = -float('inf')
+        return logits
+    return proc
+
+
 def paragraphs(text):
     """Model markdown -> paragraphs, syntax stripped, page seams re-joined."""
     text = re.sub(r'\*\*([^*]*)\*\*|(?<!\*)\*([^*]+)\*(?!\*)', lambda m: m.group(1) or m.group(2), text)
@@ -65,7 +87,8 @@ def paragraphs(text):
                 out[-1] += ' ' + p
             continue
         out.append(p)
-    return out
+    seen = set()      # the model sometimes writes a paragraph twice
+    return [p for p in out if len(p.split()) < 8 or not (p in seen or seen.add(p))]
 
 
 def pages(inputs, tmp):
@@ -80,15 +103,13 @@ def pages(inputs, tmp):
 
 def main(inputs, out):
     from mlx_vlm import load, generate
-    from mlx_vlm.prompt_utils import apply_chat_template
     model, processor = load(os.path.expanduser(MODEL))
-    prompt = apply_chat_template(processor, model.config, PROMPT, num_images=1)
     text = []
     with tempfile.TemporaryDirectory() as tmp:
         for i, img in enumerate(pages(inputs, tmp), 1):
-            r = generate(model, processor, prompt, image=[img], max_tokens=8192,
-                         temperature=0.0, repetition_penalty=1.05, verbose=False)
-            t = re.sub(r'<\|det\|>.*?<\|/det\|>|<\|/?ref\|>', '', unbpe(getattr(r, 'text', r)))
+            r = generate(model, processor, PROMPT, image=[img], max_tokens=8192, temperature=0.0,
+                         logits_processors=[no_repeat()], verbose=False)
+            t = DET.sub('', unbpe(getattr(r, 'text', r)))
             print(f'ocr-pdf: page {i}: {len(t.split())} words', file=sys.stderr)
             text.append(t)
     paras = paragraphs('\n'.join(text))
