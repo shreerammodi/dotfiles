@@ -24,6 +24,7 @@ require("conform").setup({
         markdown = { "markdownlint", "oxfmt" },
         python = { "isort", "black" },
         typescript = { "oxfmt" },
+        typescriptreact = { "oxfmt" },
         toml = { "oxfmt" },
         yaml = { "oxfmt" },
     },
@@ -43,16 +44,17 @@ vim.lsp.config("texlab", {
     },
 })
 
+-- ponytail: names here are nvim-lspconfig config names (see :h lspconfig-all),
+-- NOT mason package names. "html-lsp" etc. silently does nothing.
 vim.lsp.enable({
     "clangd",
-    "css-lsp",
+    "cssls",
     "gopls",
-    "html-lsp",
+    "html",
     "lua_ls",
-    "markdownlint",
     "oxlint",
     "pyright",
-    "tailwindcss-language-server",
+    "tailwindcss",
     "texlab",
     "tinymist",
     "ts_ls",
