@@ -6,3 +6,9 @@
 .mailsynclastrun
 
 nvim/.config/nvim/spell/*
+
+
+tmux/.config/tmux/plugins/
+
+zsh/.config/zsh/local.zsh
+git/.config/git/config.local
