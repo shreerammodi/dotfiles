@@ -75,7 +75,7 @@
     },
     "smart-splits.nvim": {
       "rev": "9493405fb8ee683aa6efd50c529f6296ad8f40ad",
-      "src": "https://github.com/mrjones2014/smart-splits.nvim",
+      "src": "https://github.com/smart-splits-nvim/smart-splits.nvim",
       "version": "3.0.0 - 4.0.0"
     },
     "telescope.nvim": {
