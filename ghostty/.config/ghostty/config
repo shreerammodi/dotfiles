@@ -18,7 +18,7 @@
 font-family = IBM Plex Mono
 font-thicken = true
 
-theme = Catppuccin Mocha
+theme = Flexoki Dark
 cursor-invert-fg-bg = true
 
 macos-titlebar-style = hidden

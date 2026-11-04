@@ -1,17 +1,19 @@
 add({
-    { src = gh("catppuccin/nvim"), name = "catppuccin" },
-    gh("mrjones2014/smart-splits.nvim"),
-})
-
-require("catppuccin").setup({
-    integrations = {
-        neogit = true,
+    { src = gh("nuvic/flexoki-nvim"), name = "flexoki" },
+    {
+        src = gh("smart-splits-nvim/smart-splits.nvim"),
+        version = vim.version.range("3"),
     },
+    gh("smart-splits-nvim/backend-tmux"),
 })
 
-vim.cmd.colorscheme("catppuccin-nvim")
+vim.opt.background = "dark"
 
-require("smart-splits").setup({})
+vim.cmd.colorscheme("flexoki")
+
+require("smart-splits").setup({
+    mux = { backend = "smart-splits-backend-tmux" },
+})
 
 -- recommended mappings
 -- resizing splits
@@ -26,7 +28,6 @@ map("n", "<C-h>", require("smart-splits").move_cursor_left)
 map("n", "<C-j>", require("smart-splits").move_cursor_down)
 map("n", "<C-k>", require("smart-splits").move_cursor_up)
 map("n", "<C-l>", require("smart-splits").move_cursor_right)
-map("n", "<C-\\>", require("smart-splits").move_cursor_previous)
 -- swapping buffers between windows
 map("n", "<leader><leader>h", require("smart-splits").swap_buf_left)
 map("n", "<leader><leader>j", require("smart-splits").swap_buf_down)
