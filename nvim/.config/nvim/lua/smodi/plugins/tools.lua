@@ -4,10 +4,6 @@ add({
     gh("folke/which-key.nvim"),
     gh("nvim-telescope/telescope.nvim"),
     gh("nvim-lua/plenary.nvim"),
-    {
-        src = gh("obsidian-nvim/obsidian.nvim"),
-        version = vim.version.range("*"),
-    },
 })
 
 local builtin = require("telescope.builtin")
@@ -52,16 +48,3 @@ map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 require("trouble").setup()
 
 require("which-key").setup()
-
-require("obsidian").setup({
-    legacy_commands = false,
-    picker = {
-        name = "telescope.nvim",
-    },
-    workspaces = {
-        {
-            name = "notes",
-            path = "~/smodi/notes/",
-        },
-    },
-})
