@@ -1,5 +1,5 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
-eval "$(gpg-connect-agent --quiet /bye)"
+command -v gpg-connect-agent >/dev/null && eval "$(gpg-connect-agent --quiet /bye)"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -21,4 +21,4 @@ export LEDGER_FILE="$HOME/Documents/src/github.com/shreerammodi/finances/hledger
 export JAVA_HOME="/opt/homebrew/opt/openjdk/"
 export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 
-source "$HOME/.env"
+[[ -r "$HOME/.env" ]] && source "$HOME/.env"

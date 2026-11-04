@@ -10,7 +10,7 @@ alias ll="eza --long --header --git --icons --classify --all"
 alias lg="lazygit"
 alias sp="sesh picker"
 alias st="sesh picker --tmux"
-alias gp="greptile"
+alias clopus='claude --model "claed-5.5-opus[1m]"'
 
 setopt globdots
 setopt autocd
@@ -26,7 +26,7 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey -e
 bindkey '^e' edit-command-line
 
-eval "$(zoxide init zsh)"
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
 
 function y() {
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
@@ -63,7 +63,7 @@ path+=(~/.lmstudio/bin)
 # GPG
 
 export GPG_TTY=$(tty)
-gpg-connect-agent /bye 2>/dev/null
+command -v zoxide >/dev/null && gpg-connect-agent /bye 2>/dev/null
 
 clip() {
   osascript -e "set the clipboard to (POSIX file \"$PWD/$1\")"
