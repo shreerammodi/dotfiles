@@ -10,7 +10,7 @@ alias ll="eza --long --header --git --icons --classify --all"
 alias lg="lazygit"
 alias sp="sesh picker"
 alias st="sesh picker --tmux"
-alias clopus='claude --model "claed-5.5-opus[1m]"'
+alias clopus='claude --model "claude-5.5-opus[1m]"'
 
 setopt globdots
 setopt autocd
