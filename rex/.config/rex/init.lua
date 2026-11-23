@@ -9,7 +9,7 @@ local dirs = { h = "left", j = "down", k = "up", l = "right" }
 
 -- Prefix basics -------------------------------------------------------------
 rex.bind(P .. "ctrl+a", "pane.send_key", { key = "ctrl+a" })
-rex.bind(P .. "ctrl+l", "pane.send_key", { key = "ctrl+l" }) -- C-l is taken by pane nav
+rex.bind(P .. "ctrl+l", "com.superlogical.terminal.clear")
 rex.bind(P .. "r", "client.config.reload")
 
 -- Tabs (tmux windows) -------------------------------------------------------
