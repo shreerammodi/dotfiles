@@ -78,3 +78,83 @@ for k, d in pairs(dirs) do
   end)
   rex.bind("ctrl+shift+" .. k, "pane.split." .. d)
 end
+
+-- Projects (replaces rexinator) ---------------------------------------------
+-- prefix g picks one, or: rex do project name=cme
+-- Opens the session if it exists, else creates it. Tabs: { label, dir, cmd }.
+-- dir is relative to root; cmd is typed into the shell (Ctrl-C drops you back to it).
+local venv = "source .venv/bin/activate"
+local projects = {
+  { name = "cambrian", root = "~/smodi/cambrian", tabs = { { "main" } } },
+  { name = "card-cutter", root = "~/smodi/projects/card-cutter",
+    tabs = { { "card-cutter", "card-cutter" }, { "proj" } } },
+  { name = "cardmirror", root = "~/smodi/projects/cardmirror/shreerammodi-cardmirror",
+    tabs = { { "cardmirror" }, { "agent" }, { "server" } } },
+  { name = "cme-payroll", root = "~/smodi/cme/payroll", tabs = { { "main", nil, venv } } },
+  { name = "cme", root = "~/smodi/cme", tabs = {
+    { "website", "cme-website" },
+    { "claude", "cme-website" },
+    { "server", "cme-website", "npm run dev" },
+    { "design-system", "cme-design-system" },
+  } },
+  { name = "convergent", root = "~/smodi/convergent", tabs = { { "main" } } },
+  { name = "debate-rankings", root = "~/smodi/projects/debate-rankings/debate-rankings",
+    tabs = { { "main", nil, venv } } },
+  { name = "dotfiles", root = "~/dotfiles", tabs = { { "dotfiles" } } },
+  { name = "ebb", root = "~/smodi/projects/ebb", tabs = {
+    { "ebb", "ebb" }, { "agent", "ebb" }, { "server", "ebb" }, { "docs", "ebb-docs" },
+  } },
+  { name = "glimpse", root = "~/smodi/projects/glimpse", tabs = { { "main" } } },
+  { name = "notes", root = "~/smodi/notes", tabs = { { "editor", nil, "nvim" }, { "agent" } } },
+}
+
+local home = os.getenv("HOME")
+local by_name, items = {}, {}
+for _, p in ipairs(projects) do
+  p.root = p.root:gsub("^~", home)
+  by_name[p.name] = p
+  items[#items + 1] = { id = p.name, subtitle = p.root:gsub("^" .. home, "~"), icon = "folder" }
+end
+
+local function go(session_id)
+  -- ponytail: no client when run from the CLI without Remote Control; the session still opens.
+  pcall(rex.client.queue, "session.select", { session_id = session_id })
+end
+
+rex.action{
+  name = "project",
+  title = "Open Project",
+  args = { name = "string?" },
+  run = function(ctx, args)
+    local name = args.name or rex.ui.pick{ title = "Open project", items = items }
+    if name == nil then return end
+    local p = by_name[name] or error("unknown project: " .. name, 0)
+
+    local list, err = rex.call("session.list")
+    if err ~= nil then error(err, 0) end
+    for _, s in ipairs(list.sessions or {}) do
+      if s.label == p.name then return go(s.session_id) end
+    end
+
+    local windows = {}
+    for i, t in ipairs(p.tabs) do
+      windows[i] = {
+        window_label = t[1],
+        layout = rex.layout.block{
+          flavor = "com.superlogical.terminal.shell",
+          options = {
+            cwd = t[2] and (p.root .. "/" .. t[2]) or p.root,
+            initial_input = t[3] and (t[3] .. "\r") or nil,
+          },
+        },
+      }
+    end
+    local s, cerr = rex.call("session.create", { label = p.name, initial_windows = windows })
+    if cerr ~= nil then error(cerr, 0) end
+    rex.call("session.attach", { session_id = s.session_id }) -- focus_window needs it
+    rex.call("session.focus_window", { session_id = s.session_id, window_id = s.initial_windows[1].window_id })
+    go(s.session_id)
+    return { session_id = s.session_id }
+  end,
+}
+rex.bind(P .. "g", "project")
