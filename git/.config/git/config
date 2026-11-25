@@ -1,7 +1,7 @@
 [user]
   name = Shreeram Modi
-  signingkey = 0x994DB28C8F367B2F
-  email = smodi@smodi.net
+  # email and signingkey live in ~/.gitconfig.local (per machine, untracked)
+  useConfigOnly = true
 
 [credential]
   helper = store
@@ -37,3 +37,7 @@
 	required = true
 [tag]
 	gpgSign = true
+
+# Per-machine overrides; missing file is silently ignored.
+[include]
+	path = ~/.gitconfig.local
