@@ -18,7 +18,7 @@ rex.bind(P .. "n", "client.tab.next")
 rex.bind(P .. "p", "client.tab.previous")
 rex.bind(P .. "ctrl+n", "client.tab.next") -- tmux-sensible
 rex.bind(P .. "ctrl+p", "client.tab.previous") -- tmux-sensible
-rex.bind(P .. "l", "client.tab.back")
+rex.bind(P .. "l", "client.navigate.back") -- no last-tab action; history covers it
 rex.bind(P .. ",", "client.tab.rename")
 rex.bind(P .. "shift+7", "client.tab.close") -- &
 rex.bind(P .. "shift+1", "pane.move_to_new_tab") -- ! (break-pane)
@@ -32,7 +32,7 @@ rex.bind(P .. "shift+'", "pane.split", { direction = "down" }) -- "
 rex.bind(P .. "x", "pane.close")
 rex.bind(P .. "z", "pane.zoom")
 rex.bind(P .. "o", "pane.focus_next")
-rex.bind(P .. ";", "pane.focus_back.in_tab")
+rex.bind(P .. ";", "client.navigate.back")
 for k, d in pairs(dirs) do
   rex.bind(P .. d, "pane.focus", { direction = d }) -- arrows
   rex.bind(P .. "shift+" .. k, "pane.move", { direction = d }) -- like skhd shift-alt-hjkl
@@ -50,7 +50,7 @@ rex.bind("resize/w", "client.mode.exit")
 
 -- Sessions ------------------------------------------------------------------
 rex.bind(P .. "s", "session.switch")
-rex.bind(P .. "shift+s", "session.back") -- tmux L, moved: L now moves panes
+rex.bind(P .. "shift+s", "client.navigate.back") -- tmux L, moved: L now moves panes
 rex.bind(P .. "shift+4", "session.rename") -- $
 rex.bind(P .. "shift+9", "session.previous") -- (
 rex.bind(P .. "shift+0", "session.next") -- )
